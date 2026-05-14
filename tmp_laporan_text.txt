@@ -1,0 +1,2416 @@
+
+
+===== PAGE 1 =====
+i 
+ 
+ PERANCANGAN PENGOLAHAN DATA PAJAK BUMI DAN 
+BANGUNAN SERTA PERAN SISTEM INFORMASI AKUNTANSI 
+BERBASIS WEB DALAM MENDUKUNG KETEPATAN DATA 
+PADA BAPENDA KABUPATEN BANDUNG 
+KERJA PRAKTEK 
+Diajukan untuk memenuhi salah satu syarat kelulusan Kerja Praktek pada Jenjang 
+Diploma Tiga (D-3) pada Program Studi Komputerisasi Akuntansi Konsentrasi 
+Perpajakan STMIK Mardira Indonesia 
+ 
+ 
+Oleh: 
+MUHAHAMAD RIPKI PADILAH 
+23030036 
+ 
+   
+Program Studi Komputerisasi Akuntansi - D3 Perpajakan 
+SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN 
+KOMPUTER 
+MARDIRA INDONESIA 
+ 
+
+
+===== PAGE 2 =====
+ii 
+ 
+ 
+PERNYATAAN KEASLIAN 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+===== PAGE 3 =====
+iii 
+ 
+LEMBAR PERSETUJUAN 
+ 
+ 
+ 
+ 
+                         
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+===== PAGE 4 =====
+iv 
+ 
+                                              LEMBAR PENGESAHAN 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+===== PAGE 5 =====
+v 
+ 
+                                                        ABSTRAK  
+ 
+ 
+Perkembangan teknologi informasi mendorong instansi pemerintah untuk meningkatkan 
+kualitas pelayanan melalui penerapan sistem berbasis digital. Badan Pendapatan Daerah 
+(BAPENDA) Kabupaten Bandung sebagai instansi yang mengelola Pajak Bumi dan 
+Bangunan (PBB) memerlukan sistem yang mampu membantu proses pengolahan data 
+secara efektif, akurat, dan terintegrasi. Proses pengelolaan data PBB yang masih 
+dilakukan secara manual atau semi-komputerisasi berpotensi menimbulkan kesalahan 
+pencatatan, duplikasi data, serta keterlambatan dalam penyajian laporan. Oleh karena itu, 
+diperlukan suatu sistem informasi berbasis web yang dapat mendukung pengolahan data 
+PBB secara terstruktur dan sistematis. 
+Penelitian ini bertujuan untuk merancang sistem pengolahan data Pajak Bumi dan 
+Bangunan berbasis web yang dapat membantu meningkatkan ketepatan data serta 
+efisiensi kerja pada BAPENDA Kabupaten Bandung. Metode penelitian yang digunakan 
+meliputi observasi, wawancara, dan studi pustaka untuk mengidentifikasi kebutuhan 
+sistem. Perancangan sistem dilakukan menggunakan pendekatan Unified Modeling 
+Language (UML) yang meliputi Use Case Diagram, Activity Diagram, Sequence 
+Diagram, dan Class Diagram, serta perancangan basis data menggunakan Entity 
+Relationship Diagram (ERD). 
+Hasil dari penelitian ini berupa rancangan sistem berbasis web yang memiliki fitur login, 
+pengelolaan data wajib pajak, pengelolaan data objek pajak, pengolahan data PBB, serta 
+pembuatan laporan. Sistem dirancang menggunakan framework Laravel dan database 
+MySQL untuk memastikan keamanan serta integritas data. Pengujian sistem dilakukan 
+menggunakan metode Black Box Testing yang menunjukkan bahwa seluruh fitur sistem 
+berjalan sesuai dengan kebutuhan fungsional yang telah ditentukan. 
+Dengan adanya sistem ini, diharapkan proses pengolahan data Pajak Bumi dan Bangunan 
+pada BAPENDA Kabupaten Bandung menjadi lebih cepat, akurat, dan efisien, serta 
+mampu meminimalisir kesalahan dalam pencatatan dan pelaporan data pajak. 
+Kata Kunci: Sistem Informasi, Pajak Bumi dan Bangunan, BAPENDA, Laravel, Basis 
+Data 
+ 
+ 
+ 
+ 
+ 
+
+===== PAGE 6 =====
+vi 
+ 
+                                                          ABSTRACT 
+                                                                     
+The development of information technology encourages government institutions to 
+improve service quality through the implementation of digital-based systems. The 
+Regional Revenue Agency (BAPENDA) of Bandung Regency, as the institution 
+responsible for managing Land and Building Tax (PBB), requires a system capable of 
+supporting data processing effectively, accurately, and in an integrated manner. The 
+existing data management process, which is still carried out manually or semi-
+computerized, has the potential to cause recording errors, data duplication, and delays in 
+report generation. Therefore, a web-based information system is needed to support 
+structured and systematic PBB data processing. 
+This study aims to design a web-based Land and Building Tax data processing system to 
+improve data accuracy and work efficiency at BAPENDA Bandung Regency. The 
+research methods used include observation, interviews, and literature study to identify 
+system requirements. The system design was carried out using the Unified Modeling 
+Language (UML) approach, including Use Case Diagrams, Activity Diagrams, Sequence 
+Diagrams, and Class Diagrams, as well as database design using an Entity Relationship 
+Diagram (ERD). 
+The result of this research is a web-based system design equipped with features such as 
+login authentication, taxpayer data management, tax object management, PBB data 
+processing, and report generation. The system was designed using the Laravel framework 
+and MySQL database to ensure data security and integrity. System testing was conducted 
+using the Black Box Testing method, and the results indicate that all system features 
+function properly according to the defined functional requirements. 
+With the implementation of this system, it is expected that the Land and Building Tax 
+data processing at BAPENDA Bandung Regency will become faster, more accurate, and 
+more efficient, while minimizing errors in data recording and reporting. 
+Keywords: Information System, Land and Building Tax, BAPENDA, Laravel, Database 
+
+===== PAGE 7 =====
+vii 
+ 
+ 
+ 
+ 
+ 
+KATA PENGANTAR 
+ 
+Puji syukur saya panjatkan kehadirat Allah SWT atas segala rahmat dan karunia -
+Nya, sehingga saya dapat menyelesaikan laporan kerja praktek ini dengan baik. Laporan 
+ini disusun sebagai salah satu syarat dalam memenuhi tugas kerja praktek pada Program 
+Studi D3 Komputerisasi Akuntansi di STMIK Mardira Indonesia. 
+Kegiatan kerja praktek ini dilaksanakan di Bidang Perpajakan II Badan Pendapatan 
+Daerah (BAPENDA) Kabupaten Ba ndung yang beralamat di Jl. Raya Soreang No. 17, 
+Kabupaten Bandung, Jawa Barat. Adapun judul laporan kerja praktek ini adalah 
+“Perancangan Penginputan Data Pajak tanah berbasis web pada bapenda kabupaten 
+bandung”. Tujuan dari kegiatan kerja praktek ini ada lah untuk merancang sistem 
+penginputan data pajak berbasis komputer yang dapat membantu meningkatkan efisiensi 
+dan akurasi proses administrasi pajak daerah. 
+Dalam penyusunan proposal ini tentu saja tidak terlepas dari bantuan, dukungan, 
+serta arahan ari berbagai pihak yang terlibat secara langung maupun tidak langsung. Oleh 
+karena iu, penulis menyampaikan terima kasih yang sebesar besarnya kepada:  
+
+===== PAGE 8 =====
+viii 
+ 
+1. Allah SWT, atas segala karunia serta kekuatan, kesehatan, dan rezeki yang diberikan 
+kepada saya dalam menjalani proses penyusunan proposal ini.  
+2. Ibu Hasanah Tisna Amijaya., M. Ak. selaku Ketua Program Studi Komputerisasi 
+Akuntansi di STMIK Mardira Indonesia  
+3. Bapak / Ibu dosen serta civitas akademika STMIK Mardira Indonesia yang telah 
+memberikan bekal ilmu serta kesempatan dalam menjalankan Kerja Praktek.  
+4. ibu TITIN selaku pembimbing lapangan di BAPENDA Kabupaten Bandung yang telah 
+memberikan kesempatan, informasi dan bantuan selama proses pengenalan tugas dan alur 
+kerja di bidang pajak.  
+5. Orang tua, keluarga serta teman-teman yang selalu memberikan dukungan, memberikan 
+doa, dan semanggat kepada saya.  
+6. Seluruh staf dan pegawai BAPENDA Kabupaten Bandung yang telah membantu saya 
+dalam memahami proses penginputan dan validasi data pajak tanah.  
+Penulis menyadari bahwa proposal ini masih belum sempurna. Maka demikian, 
+penulis  sangat mengharapkan kritik dan saran yang bersifat membangun demi perbaikan 
+di masa yang akan datang. Sangat besar harapan saya agar proposal ini dapat memberikan 
+manfaat bagi saya,  pihak kampus dan instansi tempat pelaksanaan Kerja Praktek.  
+                                                                                                                         
+Bandung,………………..2025 
+ 
+ 
+
+===== PAGE 9 =====
+ix 
+ 
+ 
+ Muhamad Ripki Padilah 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                                                                         DAFTAR ISI  
+BERITA  ACARA PENGESAHAN .............................................. Error! Bookmark not defined. 
+PROPOSAL KP ......................................................................... Error! Bookmark not defined. 
+
+===== PAGE 10 =====
+x 
+ 
+FORM   REVISI PROPOSAL ....................................................... Error! Bookmark not defined. 
+SURAT PERNYATAAN ............................................................... Error! Bookmark not defined. 
+KATA PENGANTAR ..................................................................................................................... v 
+ DAFTAR ISI ................................................................................................................................. ix 
+BAB 1 PENDAHULUAN .............................................................................................................. xi 
+1.1    Latar Belakang Masalah .................................................................................................... xi 
+1.2   Identifikasi Masalah ........................................................... Error! Bookmark not defined. 
+1.3   Batasan Masalah ................................................................. Error! Bookmark not defined. 
+1.4   Tujuan dan Kegunaan ......................................................................................................... xi 
+1.4.1 Tujuan Penelitian ........................................................... Error! Bookmark not defined. 
+1.4.2 Kegunaan Penelitian ...................................................... Error! Bookmark not defined. 
+1.5 Objek dan Waktu Penelitian ............................................................................................... xiii 
+1.5.1 Objek Penelitian .......................................................................................................... xiv 
+1.5.2 Waktu Penelitian ......................................................................................................... xiv 
+1.6 Metodologi Penelitian ......................................................................................................... xv 
+1.7 Teknik  Pengembangan Sistem ............................................ Error! Bookmark not defined. 
+1.8    Sistematika Penulisan ........................................................ Error! Bookmark not defined. 
+DAFTAR PUSTAKA ..................................................................................................................... xc 
+ 
+ 
+ 
+  
+
+===== PAGE 11 =====
+xi 
+ 
+BAB 1 PENDAHULUAN  
+ 
+ 
+1.1    Latar Belakang Masalah 
+Pajak Bumi dan Bangunan (PBB) merupakan salah satu sumber pendapatan daerah 
+yang memiliki peranan penting dalam mendukung pembiayaan pembangunan dan 
+penyelenggaraan pelayanan publik. Ketepatan data Pajak Bumi dan Bangunan menjadi 
+faktor krusial karena berpengaruh langsung terhadap besarnya penerimaan pajak serta 
+kualitas laporan pendapatan daerah yang dihasilkan. 
+Seiring deng an perkembangan teknologi informasi, instansi pemerintah dituntut 
+untuk mampu memanfaatkan sistem informasi dalam menunjang proses pengelolaan data, 
+termasuk dalam bidang perpajakan daerah. Pemanfaatan Sistem Informasi Akuntansi 
+berbasis teknologi informas i diharapkan dapat membantu meningkatkan ketepatan, 
+keakuratan, serta efisiensi pengolahan data pajak. 
+Badan Pendapatan Daerah (BAPENDA) Kabupaten Bandung sebagai instansi yang 
+bertanggung jawab dalam pengelolaan pajak daerah, khususnya Pajak Bumi dan 
+Bangunan, memiliki peran strategis dalam memastikan data PBB dikelola secara tertib, 
+akurat, dan dapat dipertanggungjawabkan. Namun berdasarkan hasil observasi selama 
+pelaksanaan kerja praktek, proses pengolahan data Pajak Bumi dan Bangunan masih 
+menghadapi beberapa kendala, antara lain data yang belum sepenuhnya terintegrasi dalam 
+satu sistem, potensi terjadinya ketidaksesuaian data, serta keterbatasan dalam penyajian 
+informasi secara cepat dan tepat. 
+ 
+
+===== PAGE 12 =====
+xii 
+ 
+Pengolahan data PBB yang belum terintegrasi secara  optimal dapat berdampak 
+pada ketepatan data dan efektivitas proses pelaporan. Kondisi tersebut menunjukkan 
+perlunya perancangan sistem pengolahan data Pajak Bumi dan Bangunan berbasis web 
+yang didukung oleh Sistem Informasi Akuntansi, sehingga pengelolaan  data dapat 
+dilakukan secara lebih terstruktur, terintegrasi, dan mendukung kebutuhan informasi pihak 
+terkait. 
+Berdasarkan uraian tersebut, penulis tertarik untuk menyusun laporan kerja praktek 
+dengan judul “Perancangan Pengolahan Data Pajak Bumi dan Bangunan serta Peran Sistem 
+Informasi Akuntansi Berbasis Web dalam Mendukung Ketepatan Data pada BAPENDA 
+Kabupaten Bandung.” 
+1.2 Identifikasi Masalah 
+Berdasarkan latar belakang yang telah diuraikan, maka dapat diidentifikasi beberapa 
+permasalahan sebagai berikut:  
+1. Proses pengolahan data Pajak Bumi dan Bangunan pada BAPENDA Kabupaten 
+Bandung belum sepenuhnya terintegrasi dalam satu sistem informasi. 
+2. Masih terdapat potensi ketidaksesuaian dan ketidakakuratan data Pajak Bumi dan 
+Bangunan. 
+3. Proses penyajian dan pelaporan data PBB belum sepenuhnya mendukung 
+kebutuhan informasi secara cepat dan tepat. 
+4. Pemanfaatan Sistem Informasi Akuntansi dalam pengolahan data PBB belum 
+berjalan secara optimal. 
+
+===== PAGE 13 =====
+xiii 
+ 
+ 
+1.3 Batasan Masalah 
+Agar pembahasan dalam laporan kerja praktek ini lebih terarah dan sesuai dengan 
+tujuan, maka diberikan batasan masalah sebagai berikut: 
+1. Penelitian difokuskan pada pengolahan data Pajak Bumi dan Bangunan. 
+2. Sistem yang dibahas merupakan perancangan sistem berbasis web yang 
+mendukung peran Sistem Informasi Akuntansi. 
+3. Objek penelitian dilakukan pada BAPENDA Kabupaten Bandung. 
+4. Pembahasan tidak mencakup seluruh jenis pajak daerah selain Pajak Bumi dan 
+Bangunan. 
+1.4   Tujuan dan Kegunaan 
+Tujuan dari pelaksanaan kerja praktek dan penyusunan laporan ini adalah: 
+1. Merancang pengolahan data Pajak Bumi dan Bangunan berbasis web. 
+2. Menganalisis peran Sistem Informasi Akuntansi dalam mendukung ketepatan data 
+Pajak Bumi dan Bangunan. 
+3. Mendukung peningkatan ketepatan dan keakuratan  data PBB pada BAPENDA 
+Kabupaten Bandung. 
+1.4.2 Kegunaan Penelitian 
+1. Bagi Instansi 
+
+===== PAGE 14 =====
+xiv 
+ 
+Memberikan gambaran perancangan sistem pengolahan data Pajak Bumi dan 
+Bangunan berbasis web yang dapat mendukung ketepatan data dan efektivitas 
+pengelolaan pajak daerah. 
+ 
+ 
+2. Bagi Mahasiswa 
+Menambah wawasan dan pengalaman dalam penerapan konsep Sistem Informasi 
+Akuntansi pada instansi pemerintah daerah. 
+3. Bagi Akademik 
+Menjadi referensi bagi penelitian selanjutnya yang berkaitan dengan Sistem 
+Informasi Akuntansi dan pengelolaan pajak daerah. 
+1.5 Objek dan Waktu Penelitian 
+1.5.1 Objek Penelitian 
+a. Nama instansi      :  Badan Pendapatan Daerah ( BAPENDA) Kabupaten  
+Bandung 
+b. Alamat                    : Komplek Pemda, Jl. Raya Soreang No. 17, pamekaraan, 
+Kec. Soreang , Kabupaten Bandung, Jawa Barat 40912  
+c. Bidang                    : Bidang Pajak Daerah-Subbidang Pajak Tanah  
+1.5.2 Waktu Penelitian 
+Kegiatan Kerja praktek dilaksanakan selama kurang lebih satu  bulan, yaitu mulai 
+tanggal 1 Oktober 2025 sampai dengan 1 November   202 5. Selama periode 
+tersebut,penulis melaksanakan berbagai kegiatan yang berkaitan dengan bidang kerja yang 
+ditempati, yaitu pada bidang pajak daerah, khususnya subbidang pajak tanah. Pada minggu 
+pertama, penulis melakukan proses pengenalan lingkungan kerja , termasuk memahami 
+
+===== PAGE 15 =====
+xv 
+ 
+struktur organisasi, tugas pokok dan fungsi instansi, serta mempelajari sistem kerja yang 
+digunakan dalam pengolahan data pajak daerah.  
+Selain itu, penulis juga beradaptasi dengan alur kerja serta melakukan observasi 
+terhadap kegiatan yang berlangsung. Pada minggu kedua hingga minggu keempat, penulis 
+mulai terlibat langsung dalam kegiatan operasional, seperti membantu penginputan data 
+pajak, melakukan pengecekan berkas. kegiatan ini bertujuan untuk meningkatkan 
+pemahaman penulis terhadap proses kerja yang sebenarnya di lapangan. 
+ 
+                                                         Table 1.1 waktu penelitian  
+ 
+ 
+1.6 Metodologi Penelitian 
+Metode penelitian yang digunakan dalam kerja praktek ini adalah metode 
+deskriptif. Metode deskriptif digunakan untuk menggambarkan kondisi sistem pengolahan 
+data Pajak Bumi dan Bangunan (PBB) yang sedang berjalan di BAPENDA Kabupaten 
+Bandung secara sistematis dan faktual berdasarkan kondisi yang terjadi di lapangan.  
+Menurut Sugiyono (2022), penelitian des kriptif merupakan metode penelitian yang 
+bertujuan untuk menggambarkan suatu fenomena atau keadaan tertentu tanpa memberikan 
+ 
+No 
+          
+             Kegiatan  
+              Waktu  
+         Pelaksanaan  
+        
+           Keterangaan  
+ 
+1 
+Observasi sistem dan pengenalan 
+Pengenalan alur kerja pajak  
+Minggu    1-2    Mengamati proses  
+kerja pada aplikasi  
+exsel  
+ 
+2 
+Penginputan data wajib pajak tanah 
+dan objek  
+Minggu    3- 4 Melakukan input data 
+melalui  pada aplikasi 
+exsel  
+ 
+3 
+ Analisis hasil dan penyusunan 
+laporan kerja praktek  
+Minggu    5 Menyusun laporan 
+dan dokumentasi 
+hasil kegiatan  
+
+===== PAGE 16 =====
+xvi 
+ 
+perlakuan atau manipulasi terhadap variabel yang diteliti. Metode ini berfokus pada 
+pemaparan kondisi apa adanya sesuai dengan data yang diperoleh. 
+Dalam pelaksanaannya, pengumpulan data dilakukan melalui beberapa teknik, yaitu: 
+a. Observasi 
+Observasi dilakukan dengan cara mengamati secara langsung proses pengolahan 
+data Pajak Bumi dan Bangunan di BAPENDA Kabupaten Bandung, mulai dari 
+pencatatan data hingga penyusunan laporan. 
+b. Wawancara 
+Wawancara dilakukan dengan petugas atau pihak terkait untuk memperoleh 
+informasi mengenai alur kerja, kendala, serta kebutuhan sistem dalam pengolahan 
+data PBB. 
+c. Dokumentasi 
+Dokumentasi dilakukan dengan mengumpulkan data berupa dokumen pendukung, 
+contoh data PBB, serta catatan yang berkaitan dengan proses pengolahan data Pajak 
+Bumi dan Bangunan. 
+1.7 Teknik Pengembangan Sistem 
+Teknik pengembangan sistem yang digunakan dalam kerja praktek ini adalah 
+metode Waterfall. Metode Waterfall dipilih karena memiliki tahapan yang sistematis dan 
+mudah dipahami, sehingga sesuai untuk pengembangan sistem berskala kecil hingga 
+menengah seperti sistem pengolahan data Pajak Bumi dan Bangunan.  Tahapan metode  
+Waterfall yang digunakan dalam penelitian ini meliputi: 
+1. Analisis Kebutuhan 
+
+===== PAGE 17 =====
+xvii 
+ 
+Tahap ini dilakukan untuk mengidentifikasi kebutuhan sistem berdasarkan hasil 
+observasi dan wawancara, meliputi kebutuhan data, proses, dan pengguna sistem. 
+2. Perancangan Sistem 
+Pada tahap ini dilakukan perancangan sistem yang mencakup perancangan alur 
+sistem, struktur database, serta rancangan antarmuka sistem. 
+3. Implementasi Sistem 
+Tahap implementasi dilakukan dengan membangun sistem pengolahan data Pajak 
+Bumi dan Bangunan berbasis web sesuai dengan hasil perancangan yang telah 
+dibuat. 
+4. Pengujian Sistem 
+Pengujian dilakukan untuk memastikan bahwa sistem dapat berjalan sesuai dengan 
+kebutuhan dan menghasilkan output yang benar. 
+Metode Waterfall digunakan sebagai acuan pengemban gan sistem hingga tahap 
+implementasi awal sesuai dengan batasan waktu pelaksanaan kerja praktek. 
+1.8 Sistematika Penulisan 
+Sistematika penulisan laporan kerja praktek ini disusun untuk memberikan 
+gambaran umum mengenai isi laporan secara keseluruhan, sehin gga memudahkan 
+pembaca dalam memahami pembahasan yang disajikan. Sistematika penulisan laporan 
+kerja praktek ini adalah sebagai berikut: 
+1. BAB I Pendahuluan 
+Bab ini membahas latar belakang masalah, identifikasi masalah, batasan masalah, 
+tujuan dan kegunaan p enelitian, metode penelitian, teknik pengembangan sistem, 
+serta sistematika penulisan. 
+
+===== PAGE 18 =====
+xviii 
+ 
+2. BAB II Landasan Teori 
+Bab ini berisi teori -teori pendukung yang berkaitan dengan Pajak Bumi dan 
+Bangunan, sistem informasi, sistem informasi akuntansi, website, serta konsep dan 
+teknologi yang digunakan dalam pengembangan sistem. 
+3. BAB III Analisis dan Perancangan Sistem 
+Bab ini membahas hasil analisis sistem yang sedang berjalan di BAPENDA 
+Kabupaten Bandung serta perancangan sistem pengolahan data Pajak Bumi dan 
+Bangunan berbasis web. 
+4. BAB IV Implementasi Sistem 
+Bab ini menjelaskan tahapan implementasi sistem pengolahan data Pajak Bumi dan 
+Bangunan berbasis web, termasuk tampilan sistem dan alur penggunaan sesuai 
+dengan progres pengembangan sistem. 
+5. BAB V Penutup 
+Bab ini berisi kesimpulan dari hasil kerja praktek yang telah dilakukan serta saran 
+untuk pengembangan sistem di masa yang akan datang. 
+                                                                           
+BAB II 
+LANDASAN TEORI 
+ 
+2.1 Konsep Dasar Perancangan 
+2.1.1 Pengertian Perancangan Sistem 
+Perancangan sistem merupakan tahapan lanjutan setelah analisis sistem yang 
+bertujuan untuk menerjemahkan kebutuhan pengguna ke dalam bentuk rancangan sistem 
+yang terstruktur dan sistematis. Tahap perancangan sistem dilakukan agar sistem yang akan 
+
+===== PAGE 19 =====
+xix 
+ 
+dikembangkan mampu menjawab permasalahan yang terdapat pada sistem sebelumnya 
+serta memenuhi kebutuhan organisasi. 
+Menurut Mulyani (2017), perancangan sistem adalah proses penentuan data, 
+proses, dan tampilan yang diperlukan oleh sistem baru. Perancangan sistem memberikan 
+gambaran secara rinci mengenai bagaimana sistem akan bekerja, mulai dari alur proses,  
+input, output, hingga penyimpanan data. Dalam konteks pengolahan data Pajak Bumi dan 
+Bangunan (PBB), perancangan sistem diperlukan untuk memastikan bahwa data wajib 
+pajak, objek pajak, serta nilai pajak dapat dikelola secara terstruktur, terintegrasi, dan  
+mendukung ketepatan data. Perancangan sistem yang baik juga akan memudahkan petugas 
+dalam melakukan pencatatan, pengolahan, serta pelaporan data PBB. 
+2.2 Sistem Informasi 
+Sistem informasi merupakan sekumpulan komponen yang saling berhubungan dan 
+bekerja sama untuk mengumpulkan, mengolah, menyimpan, serta menyajikan informasi 
+yang dibutuhkan oleh pengguna. Sistem informasi berperan penting dalam mendukung 
+kegiatan operasional dan pengambilan keputusan dalam suatu organisasi.  Menurut Jonny 
+Seah (2020), sistem informasi adalah kombinasi dari perangkat keras, perangkat lunak, 
+basis data, prosedur, dan sumber daya manusia yang saling berinteraksi untuk 
+menghasilkan informasi. Sementara itu, Wahyudi dan Ridho (2020) menyatakan bahwa 
+sistem informasi meru pakan sistem yang dirancang untuk menyediakan informasi guna 
+mendukung aktivitas organisasi.  Dalam pengelolaan Pajak Bumi dan Bangunan, sistem 
+informasi digunakan untuk membantu proses pencatatan dan pengolahan data pajak agar 
+lebih tertata dan mudah diakses. Dengan adanya sistem informasi yang terintegrasi, potensi 
+
+===== PAGE 20 =====
+xx 
+ 
+kesalahan pencatatan data dapat diminimalkan serta proses pelaporan dapat dilakukan 
+dengan lebih cepat dan akurat. 
+2.3 Sistem Informasi Akuntansi 
+Sistem Informasi Akuntansi (SIA) merupakan bagia n dari sistem informasi yang 
+berfokus pada pengolahan data keuangan dan akuntansi. Sistem ini berfungsi untuk 
+mengumpulkan, mencatat, mengolah, dan menyajikan informasi keuangan yang 
+dibutuhkan oleh manajemen dan pihak terkait. Menurut Rahmawati dan Sumarno (2020), 
+Sistem Informasi Akuntansi memiliki peran penting dalam menunjang kegiatan 
+operasional, membantu pengambilan keputusan, serta meningkatkan pengendalian internal 
+organisasi. Sementara itu, Wardani dan Dewi (2022) menyatakan bahwa SIA berperan 
+dalam menghasilkan informasi akuntansi yang akurat, relevan, dan tepat waktu.  Dalam 
+pengelolaan Pajak Bumi dan Bangunan pada BAPENDA Kabupaten Bandung, Sistem 
+Informasi Akuntansi berperan dalam mendukung ketepatan data penerimaan pajak, 
+membantu proses pencatatan transaksi pajak, serta menghasilkan laporan penerimaan pajak 
+daerah yang dapat dipertanggungjawabkan. 
+2.4 Pajak Bumi dan Bangunan 
+Pajak Bumi dan Bangunan (PBB) merupakan pajak yang dikenakan atas 
+kepemilikan atau pemanfaatan bumi dan/atau bangunan. PBB  menjadi salah satu sumber 
+pendapatan daerah yang memiliki peran strategis dalam mendukung pembiayaan 
+pembangunan daerah.  Pengelolaan PBB mencakup pencatatan data wajib pajak, objek 
+pajak, serta perhitungan nilai pajak yang terutang. Oleh karena itu, penge lolaan data PBB 
+memerlukan sistem yang mampu  mengelola data secara akurat dan konsisten. Ketepatan 
+data PBB sangat penting karena berpengaruh langsung terhadap besarnya penerimaan 
+pajak dan kualitas laporan keuangan daerah.  Dengan dukungan sistem informasi berbasis 
+
+===== PAGE 21 =====
+xxi 
+ 
+web, pengolahan data PBB diharapkan dapat dilakukan secara lebih efektif dan efisien, 
+serta meminimalkan potensi kesalahan dalam pencatatan dan pelaporan data. 
+2.5 Website 
+Website merupakan kumpulan halaman yang dapat diakses melalui jaringan 
+internet dan berisi informasi dalam bentuk teks, gambar, video, maupun elemen interaktif 
+lainnya. Website sering digunakan sebagai media penyampaian informasi dan pengolahan 
+data secara online.  Menurut Elgamar (2020), website adalah media yang terdiri dari 
+beberapa halaman yang saling terhubung dan berfungsi sebagai sarana penyampaian 
+informasi. Sedangkan menurut Muhyidin et al. (2020), website merupakan layanan 
+informasi berbasis internet yang memudahkan pengguna dalam mengakses data secara 
+cepat dan fleksibel. Dalam penelitian ini, website digunakan sebagai media perancangan 
+sistem pengolahan data Pajak Bumi dan Bangunan berbasis web, sehingga petugas dapat 
+mengakses dan mengelola data PBB secara lebih mudah dan terintegrasi. 
+2.6 Bahasa Pemrograman 
+Bahasa pemrograman merupakan sekumpulan instruksi yang digunakan untuk 
+mengembangkan aplikasi atau sistem komputer. Bahasa pemrograman memungkinkan 
+pengembang untuk membuat sistem informasi yang dapat mengolah data sesuai kebutuhan 
+pengguna. Selain itu, Bahas a pemograman menjadi sarana komunikasi antara manusia 
+dengan komputer dalam bentuk perintah-perintah yang tertukstur. Dengan adanya Bahasa 
+pemograman, proses pengolahan data dapat dilakukan secara lebih cepat, akurat, dan 
+efisien  sesuai dengan logika yang dirancang oleh pengembang. 
+2.6.1 JavaScript 
+JavaScript merupakan bahasa pemrograman yang bersifat client -side dan banyak 
+digunakan dalam pengembangan website. JavaScript berfungsi untuk membuat halaman 
+
+===== PAGE 22 =====
+xxii 
+ 
+web menjadi lebih interaktif dan dinamis. Menurut Kad ir dan Triwahyuni (2013), 
+JavaScript digunakan bersama HTML untuk menentukan berbagai tindakan pada halaman 
+web. Selain itu, JavaScript juga mampu menangani berbagai event seperti klik, input 
+pengguna, serta manipulasi tampilan halaman secara langsung tanp a perlu memuat ulang 
+halaman. Hal ini menjadikan JavaScript sebagai salah satu bahasa pemrograman yang 
+sangat penting dalam pengembangan web modern. 
+2.6.2 TypeScript 
+TypeScript merupakan pengembangan dari JavaScript yang menyediakan fitur 
+tambahan seperti pengetikan statis (static typing). Menurut Cristiani (2021), TypeScript 
+dikembangkan untuk meningkatkan kualitas dan kemudahan pemeliharaan kode program, 
+khususnya dalam pengembangan aplikasi skala menengah hingga besar.  Dengan adanya 
+fitur tersebut, kesalahan dalam penulisan kode dapat dideteksi lebih awal sebelum program 
+dijalankan. Selain itu, TypeScript juga membantu pengembang dalam menulis kode yang 
+lebih terstruktur, mudah dibaca, serta lebih mudah untuk dikembangkan di masa 
+mendatang. Hal ini menjad ikan TypeScript sebagai pilihan yang tepat dalam 
+pengembangan aplikasi modern yang membutuhkan keandalan dan skalabilitas tinggi. 
+Selain itu, TypeScript memiliki kompatibilitas yang baik dengan JavaScript 
+sehingga dapat digunakan secara bertahap dalam proyek yang sudah ada. Pengembang juga 
+dapat memanfaatkan berbagai fitur modern yang disediakan tanpa harus meninggalkan 
+ekosistem JavaScript. Dengan demikian, penggunaan TypeScript dapat meningkatkan 
+efisiensi kerja serta kualitas aplikasi yang dikembangkan. 
+
+===== PAGE 23 =====
+xxiii 
+ 
+2.7 Framework 
+Framework merupakan kerangka kerja yang digunakan untuk mempermudah 
+proses pengembangan aplikasi dengan menyediakan komponen dan fungsi yang siap 
+digunakan. Penggunaan framework membantu pengembang dalam membuat aplikasi 
+secara lebih cepa t, terstruktur, dan konsisten.  Menurut Sallaby dan Kanedi (2020), 
+framework adalah kumpulan instruksi yang dikemas dalam bentuk class dan function yang 
+memudahkan pengembang dalam membangun aplikasi.  Selain itu, framework juga 
+membantu dalam penerapan stan dar pengembangan yang baik sehingga aplikasi yang 
+dihasilkan lebih terorganisir dan mudah untuk dikembangkan kembali. 
+2.7.1 Next.js 
+Next.js merupakan framework berbasis React.js yang mendukung pengembangan 
+aplikasi web dengan fitur server-side rendering. Menurut Thakkar (2020), Next.js memiliki 
+keunggulan dalam performa aplikasi, pengelolaan routing, serta kemudahan 
+pengembangan aplikasi web modern. Selain itu, Next.js juga mendukung fitur seperti static 
+site generation dan API routes yang memudahkan integr asi antara frontend dan backend. 
+Dengan fitur -fitur tersebut, pengembang dapat menghasilkan aplikasi web yang lebih 
+cepat, efisien, dan SEO-friendly. 
+2.8 Visual Studio Code 
+Visual Studio Code merupakan editor kode sumber yang ringan dan memiliki fitur 
+lengkap untuk mendukung pengembangan aplikasi. Editor ini mendukung berbagai bahasa 
+pemrograman dan menyediakan ekstensi tambahan untuk meningkatkan produktivitas 
+pengembang. Menurut Microsoft (2020), Visual Studio Code dirancang untuk mendukung 
+pengembangan aplikasi secara efisien. Selain itu, Visual Studio Code juga memiliki fitur 
+
+===== PAGE 24 =====
+xxiv 
+ 
+seperti debugging, integrasi Git, serta tampilan antarmuka yang mudah digunakan sehingga 
+banyak dipilih oleh pengembang dalam membuat aplikasi. 
+2.9 Penelitian Terdahulu 
+Penelitian terdahulu digunakan sebagai bahan pembanding dan referensi dalam 
+pelaksanaan penelitian ini. Beberapa penelitian yang relevan dengan sistem informasi 
+pengolahan data Pajak Bumi dan Bangunan telah dilakukan sebelumnya. Penelitian-
+penelitian tersebut menjadi dasar dalam perancangan sistem yang dikembangkan pada 
+penelitian ini. Selain itu, dengan mempelajari penelitian terdahulu, penulis dapat 
+mengetahui kelebihan dan kekurangan dari sistem yang telah ada sehingga dapat 
+dijadikan bahan evaluasi untuk mengembangkan sistem yang lebih baik. 
+                                                            Table 2.1 penelitian terdahulu 
+No Peneliti 
+& Tahun 
+ Judul Penelitian Metode / 
+Pendekatan Hasil Penelitian Keterkaitan 
+dengan Penelitian 
+1 
+Natonis, 
+dkk. 
+(2023) 
+ 
+Sistem Informasi 
+Pajak Bumi dan 
+Bangunan Berbasis 
+Stand Alone 
+Metode 
+pengembangan 
+sistem dan 
+analisis 
+kebutuhan 
+Sistem informasi 
+PBB mampu 
+membantu proses 
+pengolahan data 
+pajak agar lebih 
+terstruktur dan 
+mengurangi 
+kesalahan 
+pencatatan 
+Penelitian ini 
+relevan karena 
+sama-sama 
+membahas sistem 
+informasi PBB, 
+namun penelitian 
+ini menggunakan 
+sistem berbasis web 
+2 
+Gani, 
+dkk. 
+(2016) 
+ Sistem Informasi 
+Manajemen 
+Pemantauan 
+Pembayaran Pajak 
+Bumi dan 
+Bangunan Berbasis 
+Web 
+Perancangan 
+sistem berbasis 
+web 
+Sistem mampu 
+menampilkan data 
+pembayaran dan 
+laporan PBB secara 
+online 
+Relevan karena 
+menggunakan 
+teknologi web 
+untuk pengelolaan 
+dan pelaporan data 
+PBB 
+3 
+Aprianty 
+& 
+Lambey 
+(2016) 
+ Evaluasi Sistem 
+Manajemen 
+Informasi Objek 
+Pajak (SISMIOP) 
+Metode evaluatif 
+dan analisis 
+sistem 
+Sistem SISMIOP 
+berpengaruh 
+terhadap 
+peningkatan 
+Mendukung 
+penelitian ini dalam 
+aspek pengelolaan 
+data objek pajak 
+
+===== PAGE 25 =====
+xxv 
+ 
+No Peneliti 
+& Tahun 
+ Judul Penelitian Metode / 
+Pendekatan Hasil Penelitian Keterkaitan 
+dengan Penelitian 
+terhadap 
+Penerimaan PBB 
+efektivitas 
+pengelolaan data 
+objek pajak 
+sebagai dasar 
+perhitungan PBB 
+4 
+Nisa & 
+Tamrin 
+(2025) 
+ Digital 
+Transformation and 
+Multi-Level 
+Collaboration in 
+Regional Tax Data 
+Collection 
+Studi kualitatif 
+dan analisis 
+kebijakan 
+Digitalisasi sistem 
+pajak daerah 
+meningkatkan 
+efektivitas 
+pengumpulan data 
+pajak 
+Menjadi landasan 
+teori penting terkait 
+urgensi penerapan 
+sistem informasi 
+pajak daerah 
+5 
+Wijaya, 
+dkk. 
+(2019) 
+ Sistem Informasi 
+Geografis sebagai 
+Media Informasi 
+Pajak Bumi dan 
+Bangunan 
+Perancangan 
+sistem berbasis 
+SIG 
+Sistem SIG mampu 
+menyajikan 
+informasi PBB 
+secara visual dan 
+informatif 
+Menunjukkan 
+pemanfaatan 
+teknologi informasi 
+dalam pengelolaan 
+dan penyajian data 
+PBB 
+ 
+                                                                                        
+  Berdasarkan Tabel 2.9 dapat disimpulkan bahwa penelitian-penelitian terdahulu 
+umumnya membahas pengembangan dan evaluasi sistem informasi Pajak Bumi dan 
+Bangunan dengan berbagai pendekatan teknologi. Perbedaan penelitian ini dengan 
+penelitian sebelumnya terletak pada fokus perancangan sistem pengolaha n data PBB 
+berbasis web yang disesuaikan dengan kebutuhan dan kondisi objek penelitian, sehingga 
+diharapkan mampu meningkatkan ketepatan dan efisiensi pengelolaan data pajak.  Selain 
+itu, penelitian ini juga mempertimbangkan aspek kemudahan penggunaan siste m agar 
+dapat dioperasikan oleh pengguna dengan lebih efektif. Penyesuaian terhadap kebutuhan 
+instansi dilakukan untuk memastikan sistem yang dibangun benar-benar relevan dan dapat 
+diterapkan secara optimal. Dengan demikian, sistem yang dikembangkan diharapkan dapat 
+memberikan kontribusi nyata dalam mendukung proses pengelolaan data Pajak Bumi dan 
+Bangunan. 
+
+===== PAGE 26 =====
+xxvi 
+ 
+ 
+BAB III 
+ANALISIS DAN PERANCANGAN SISTEM 
+ 
+3.1 Analisis Sistem 
+Analisis sistem merupakan tahap awal dalam pengembangan sistem yang bertujuan 
+untuk memahami kondisi sistem yang sedang berjalan serta mengidentifikasi permasalahan 
+yang ada. Tahap analisis ini dilakukan agar sistem yang dirancang dapat menjawab 
+kebutuhan pengguna dan memperbaiki kelemahan pada sistem sebelumnya.  Pada kerja 
+praktek ini, analisis  sistem difokuskan pada proses pengolahan data Pajak Bumi dan 
+Bangunan (PBB) di BAPENDA Kabupaten Bandung. Analisis dilakukan melalui observasi 
+langsung, wawancara dengan petugas terkait, serta pengamatan terhadap dokumen dan alur 
+kerja yang digunakan dalam pengolahan data PBB.  
+3.1.1 Analisis Sistem yang Sedang Berjalan 
+Berdasarkan hasil observasi yang dilakukan selama pelaksanaan kerja praktek di 
+BAPENDA Kabupaten Bandung, diketahui bahwa proses pengolahan data Pajak Bumi dan 
+Bangunan masih belum sepenuhnya terintegrasi dalam satu sistem informasi. Proses 
+pengolahan data dilakukan melalui beberapa tahapan yang terpisah, mulai dari penerimaan 
+data wajib pajak, pencatatan data objek pajak, hingga penyusunan laporan. 
+Karakteristik sistem yang sedang berjalan antara lain: 
+1. Data Pajak Bumi dan Bangunan belum dikelola dalam satu sistem yang terintegrasi. 
+2. Proses pencatatan dan pengolahan data dilakukan secara bertahap sehingga 
+membutuhkan waktu yang relatif lama. 
+3. Potensi terjadinya ketidaksesuaian data masi h cukup tinggi, terutama pada saat 
+proses rekapitulasi data. 
+4. Penyajian laporan data PBB belum sepenuhnya mendukung kebutuhan informasi 
+secara cepat dan akurat. 
+5. Belum tersedia sistem berbasis web yang dapat diakses secara fleksibel oleh 
+petugas terkait. 
+
+===== PAGE 27 =====
+xxvii 
+ 
+6. Kondisi tersebut menyebabkan proses pengolahan data PBB menjadi kurang efektif 
+dan berpotensi menurunkan ketepatan data yang dihasilkan. 
+3.1.2 Profil Singkat BAPENDA Kabupaten Bandung 
+Badan Pendapatan Daerah (BAPENDA) Kabupaten Bandung merupakan instansi 
+pemerintah daerah yang memiliki tugas dan fungsi dalam pengelolaan pendapatan daerah, 
+khususnya yang bersumber dari pajak dan retribusi daerah. Salah satu jenis pajak daerah 
+yang dikelola oleh BAPENDA Kabupaten Bandung adalah Pajak Bumi dan Bangunan 
+(PBB). BAPENDA Kabupaten Bandung berperan penting dalam memastikan bahwa 
+proses pengelolaan pajak daerah berjalan sesuai dengan peraturan yang berlaku serta 
+mendukung transparansi dan akuntabilitas pengelolaan keuangan daerah. 
+3.1.3 Visi dan Misi BAPENDA Kabupaten Bandung 
+VISI PELAYANAN :  Mewujudkan peningkatan pendapatan daerah yang 
+berorientasi pada pelayanan publik yang berkualitas. 
+MISI PELAYANAN : 1. mencipatkan budaya taat membayar pajak dengan 
+sosialisasi yang efektif kepada wajib pajak. 
+2. meningkatkan kualitas dan profesionalitas petugas pelayanan pajak daerah. 
+3. meningkatkan kualitas sarana dan prasarana pelayanan pajak daerah. 
+4. mengembangkan pelayanan pajak daerah berbasis informasi teknologi. 
+3.1.4 Struktur Organisasi BAPENDA Kabupaten Bandung 
+Struktur organisasi BAPENDA Kabupaten Bandung disusun untuk mendukung 
+pelaksanaan tugas dan fungsi pengelolaan pendapatan daerah. Struktur organisasi ini 
+menggambarkan pembagian tugas, wewenang, serta alur koordinasi antar bagian dalam 
+organisasi. Struktur organisasi tersebut berperan penting dalam memastikan bahwa proses 
+
+===== PAGE 28 =====
+xxviii 
+ 
+pengelolaan Pajak Bumi dan Bangunan dapat berjalan secara efektif sesuai dengan tugas 
+dan tanggung jawab masing-masing bagian. 
+Pembentukan Badan Pendapatan Daerah Kabupaten Bandung didasarkan pada 
+Peraturan Daerah Kabupaten Bandung Nomor 12 Tahun 2016 tentang Pembentukan 
+Susunan dan Perangkat Daerah Kabupaten Bandung serta Peraturan Bupati Nomor 
+110 Tahun 2023 tentang tugas, fungsi dan tata kerja Badan Pendapatan Daerah. 
+BAPENDA berposisi sebagai unsur penunjang Pemerintah Daerah yang dipimpin 
+oleh seorang Kepala Badan dan memiliki tanggung jawab kepada Bupati Bandung 
+melalui Sekretaris Daerah Kabupaten Bandung. 
+Tahun 2023 merupakan tahun ketiga dari pelaksanaan Rencana Strat egis 
+BAPENDA Kabupaten Bandung Tahun 2021-2026 yang berpedoman pada Rencana 
+Pembangunan Jangka Menengah Daerah atau disingkat RPJMD Kabupaten Bandung 
+untuk periode yang sama. 
+Berdasarkan regulasi yang berlaku, Kepala Badan Pendapatan Daerah 
+memiliki tugas pokok untuk Memimpin, Mengatur, Merumuskan, Membina, 
+Mengendalikan, Mengkoordinasikan dan Mempertanggungjawabkan Kebijakan dan 
+Pelaksanaan penunjang urusan Pemerintahan bidang Keuangan. Struktur organisasi 
+Bapenda Kabupaten Bandung tersusun sebagai berikut: 
+1. Kepala Badan 
+Badan Pendapatan Daerah dipimpin oleh seorang Kepala Badan yang 
+mempunya tugas pokok memimpin, mengatur, merumuskan, membina 
+mengendalikan, mengkoordinasikan dan mempertanggungjawabkan kebijakan dan 
+
+===== PAGE 29 =====
+xxix 
+ 
+pelaksanaan penunjang urusan pemerintahan bidang keuangan. Dalam melaksanakan 
+tugas pokoknya Kepala Badan menyelenggarakan fungsi :  
+a. Perumusan kebijakan teknis sesuai dengan lingkup tugasnya;  
+b. Penyelengaraan urusan pemerintahan dan pelayanan umum sesuai dengan 
+tugasnya; 
+c. Pembinaan dan pelaksanaan tugas sesuai dengan lingkup tugasnya.  
+ 
+Kepala Badan, membawahkan : 
+a. Sekretariat;  
+b. Bidang Perencanaan Pengendalian Operasional;  
+c. Bidang Penagihan dan Keberatan;  
+d. Bidang Pajak I; d. Bidang Pajak II;  
+e. UPTD Pelayanan Pajak Daerah Wilayah I Soreang; 
+f. UPTD Pelayanan Pajak Daerah Wilayah II Dayeuhkolot; 
+g. UPTD Pelayanan Pajak Daerah Wilayah III Ciparay;  
+h. UPTD Pelayanan Pajak Daerah Wilayah IV Majalaya; 
+i. UPTD Pelayanan Pajak Daerah Wilayah V Rancaekek;  
+j. Kelompok Jabatan Fungsional Jabatan Fungsional. 
+2. Sekretariat 
+Sekretariat dipimpin oleh seorang Sekretaris yang memiliki tugas pokok untuk 
+memimpin, mengkoordinasikan dan mengendalikan tugas -tugas di bidang 
+pengelolaan pelayanan kesekretariatan yang meliputi pengkoordinasian penyusunan 
+program, pengelolaan umum dan kepegawaian serta pengelolaan keuangan. 
+
+===== PAGE 30 =====
+xxx 
+ 
+Fungsi-fungsi yang dijalankan oleh Sekretaris meliputi:  
+a. penetapan penyusunan rencana kerja kesekretariatan; 
+b. pengumpulan dan pengolahan dokumen perencanaan Badan; 
+c. penyelenggaraan tugas-tugas kesekretariatan;  
+d. penyelenggaraan pengendalian pelaksanaan kegiatan pelayanan umum dan 
+kepegawaian, keuangan serta perencanaan, evaluasi dan pelaporan; 
+e. penyelenggaraan koordinasi, integrasi dan sinkronisasi sesuai dengan lingkup 
+tugasnya;  
+f. penyelenggaraan monitoring, evaluasi dan pelaporan capaian kinerja 
+sekretariat. 
+Sekretaris membawahkan:  
+a. Perencana;  
+b. Subbagian Umum dan Kepegawaian;  
+c. Analis Keuangan Pusat dan Daerah; dan  
+d. Pelaksana. 
+3. Bidang Perencanaan Pengendalian Operasional 
+Bidang Perencanaan Pengendalian Operasional dipimpin oleh seorang Kepala 
+Bidang yang mempunyai tugas pokok memimpin, mengkoordinasikan dan 
+mengendalikan tugas -tugas di bidang Perencanaan Pengendalian Operasional. 
+Dalam menyelenggarakan fungsinya, bidang ini melakukan:  
+
+===== PAGE 31 =====
+xxxi 
+ 
+a. penyelenggaraan perumusan kebijakan teknis operasional bidang Perencanaan 
+Pengendalian Operasional yang meliputi Subbidang Perencanaan dan Pendapatan, 
+Subbidang Pemantauan dan Pengendalian, serta Evaluasi dan Pelaporan;  
+b. penyelenggaraan rencana kerj a bidang Perencanaan Pengendalian Operasional; 
+penyelenggaraan koordinasi, integrasi dan sinkronisasi sesuai dengan lingkup 
+tugasnya;  
+c. penyelenggaraan monitoring, evaluasi dan pelaporan capaian kinerja bidang. 
+Kepala Bidang Perencanaan Pengendalian Operasional membawahkan:  
+a. Subbidang Perencanaan dan Pendapatan;  
+b. Subbidang Pemantauan dan Pengendalian;  
+c. Analis Keuangan Pusat dan Daerah; dan  
+d. Pelaksana. 
+4. Bidang Penagihan dan Keberatan 
+Bidang Penagihan dan Keberatan dipimpin oleh seorang Kepala Bidang yang 
+mempunyai tugas pokok memimpin, mengkoordinasikan dan mengendalikan tugas-
+tugas di bidang Penagihan dan Keberatan. 
+Fungsi yang dijalankan meliputi:  
+a. penyelenggaraan perumusan kebijakan teknis operasional Bidang Penagihan 
+dan Keberatan yang mencakup Subbidang Penagihan, Subbidang Keberatan 
+dan Pengurangan, serta Pembukuan dan Penatausahaan Piutang Pajak;  
+
+===== PAGE 32 =====
+xxxii 
+ 
+b. penyelenggaraan rencana kerja Bidang Penagihan dan Keberatan; 
+penyelenggaraan koordinasi, integrasi dan sinkronisasi sesuai dengan lingkup 
+tugasnya;  
+c. penyelenggaraan monitoring, evaluasi dan pelaporan capaian kinerja Bidang. 
+Kepala Bidang Penagihan dan Keberatan membawahkan:  
+a. Subbidang Penagihan;  
+b. Subbidang Keberatan dan Pengurangan;  
+c. Analis Keuangan Pusat dan Daerah; dan  
+d. Pelaksana. 
+5. Bidang Pajak I 
+Bidang Pajak I dipimpin oleh seorang Kepala Bidang yang mempunyai tugas 
+pokok memimpin, mengkoordinasikan dan mengendalikan tugas -tugas di bidang 
+Pajak I. 
+Fungsi yang diselenggarakan meliputi:  
+a. penyelenggaraan perumusan kebijakan teknis operasional bidang Pajak I yang 
+mencakup Subbidang Pendaftaran dan Pendataan I, Subbidang Penetapan I, 
+dan Pembukuan Pajak I;  
+b. penyelenggaraan rencana kerja bidang Pajak I;  
+c. penyelenggaraan koordinasi, integrasi dan sinkronisasi sesuai dengan lingkup 
+tugasnya;  
+d. penyelenggaraan monitoring, evaluasi dan pelaporan capaian kinerja bidang 
+Pajak I. 
+
+===== PAGE 33 =====
+xxxiii 
+ 
+Kepala Bidang Pajak I membawahkan:  
+a. Subbidang Pendaftaran dan Pendataan I;  
+b. Subbidang Penetapan I;  
+c. Analis Keuangan Pusat dan Daerah; dan  
+d. Pelaksana. 
+6. Bidang Pajak II 
+Bidang Pajak II dipimpin oleh seorang Kepala Bidang yang mempunyai tugas 
+pokok memimpin, mengkoordinasikan dan mengendalikan tugas -tugas di bidang 
+Pajak II. 
+Fungsi yang dijalankan meliputi: 
+a. penyelenggaraan perumusan kebijakan teknis operasional bidang Pajak II yang 
+mencakup Subbidang Pendaftaran dan Pendataan II, Subbidang Penetapan II, 
+dan Pembukuan Pajak II;  
+b. penyelenggaraan rencana kerja bidang Pajak II;  
+c. penyelenggaraan koordinasi, integrasi dan sinkronisasi sesuai dengan lingkup 
+tugasnya;  
+d. penyelenggaraan monitoring, evaluasi dan pelaporan capaian kinerja bidang 
+Pajak II. 
+Kepala Bidang Pajak II membawahkan:  
+a. Subbidang Pendaftaran dan Pendataan II;  
+b. Subbidang Penetapan II;  
+c. Analis Keuangan Pusat dan Daerah; dan  
+
+===== PAGE 34 =====
+xxxiv 
+ 
+d. Pelaksana. 
+7. Unit Pelayanan Teknis Daerah (UPTD) 
+UPTD Pelayanan Pajak Daerah terdiri dari lima wilayah, yaitu:  
+a. UPTD Pelayanan Pajak Daerah Wilayah I Soreang;  
+b. UPTD Pelayanan Pajak Daerah Wilayah II Dayeuhkolot;  
+c. UPTD Pelayanan Pajak Daerah Wilayah III Ciparay;  
+d. UPTD Pelayanan Pajak Daerah Wilayah IV Majalaya; dan  
+e. UPTD Pelayanan Pajak Daerah Wilayah V Rancaekek. 
+UPTD Pelayanan Pajak Daerah dari Wilayah I sampai dengan Wilayah V 
+dipimpin oleh seorang Kepala yang berkedudukan berada di bawah dan 
+bertanggungjawab kepada Kepala Bapenda.  UPTD memiliki tugas pokok 
+memimpin, merencanakan, melaksanakan, mengkoordinasikan, mengendalikan, dan 
+melaporkan pelaksanaan program dan pengelolaan sebagian fungsi Badan di bidang 
+Pelayanan Pajak Daerah. 
+Fungsi yang diselenggarakan oleh UPTD meliputi:  
+a. pengumpulan dan pengolahan bahan penyusunan rencana operasional 
+pembinaan, pengembangan dan pengendalian terhadap Pelayanan Pajak 
+Daerah;  
+b. pelaksanaan pembinaan, pengembangan serta pengendalian terhadap 
+Pelayanan Pajak Daerah;  
+c. pelaksanaan koordinasi, integrasi dan sinkronisasi sesuai dengan tugas pokok 
+dan fungsi;  
+
+===== PAGE 35 =====
+xxxv 
+ 
+d. pelaksanaan monitoring, evaluasi dan pelaporan serta capaian kinerja sesuai 
+dengan tugas pokok dan fungsi. 
+Seluruh Kepala UPTD Pelayanan Pajak Daerah mulai dari Wilayah I sampai 
+dengan Wilayah V membawahkan Subbagian Tata Usaha, dan Subbagian Tata Usaha 
+membawahkan Pelaksana. 
+        
+ 
+ 
+
+
+===== PAGE 36 =====
+xxxvi 
+ 
+             
+Gambar  3.1 struktur organisasi bapenda 
+3.1.5 Flowmap Sistem yang Sedang Berjalan 
+Flowmap sistem yang sedang berjalan digunakan untuk menggambarkan alur 
+proses pengolahan data Pajak Bumi dan Bangunan di BAPENDA Kabupaten Bandung. 
+Proses dimulai dari penerimaan data wajib pajak, pencatatan data objek pajak, pengolahan 
+data, hingga penyusunan laporan. Alur proses tersebut menunjukkan bahwa setiap tahapan 
+masih dilakukan secara terpisah sehingga membutuhkan koordinasi antar bagian. Kondisi 
+ini berpotensi menimbulkan keterlambatan dan ketidaksesuaian data pada saat proses 
+rekapitulasi.  
+Selain itu, pemisahan proses pada setiap  tahapan juga dapat meningkatkan risiko 
+terjadinya kesalahan dalam penginputan maupun pengolahan data. Kurangnya integrasi 
+sistem menyebabkan informasi tidak dapat diakses secara real-time oleh setiap bagian yang 
+membutuhkan. Oleh karena itu, diperlukan su atu sistem yang terintegrasi untuk 
+meningkatkan efisiensi, akurasi, serta mempercepat proses pengelolaan data Pajak Bumi 
+dan Bangunan. 
+
+
+===== PAGE 37 =====
+xxxvii 
+ 
+ 
+ 
+Gambar 1.1 flowmap sistem yang sedang berjalan 
+3.1.6 Analisis SWOT  
+Table 3.1 analisis swot 
+Kekuatan (Srenght) Kelemahan (weakness ) 
+• proses pencatatan dan pengelolaan 
+data PBB telah memiliki alur kerja 
+yang jelas . 
+• proses pencatatan data masih belum  
+terintegrasi secara penuh dalam satu 
+sistem informasi . 
+• petugas PBB memiliki pemahaman 
+terhadap prosedur pencatatan dan 
+pengolahan data pajak . 
+• potensi terjadinya kesalahan 
+pencatatan dan pengolahan data pajak 
+. 
+
+
+===== PAGE 38 =====
+xxxviii 
+ 
+• data PBB digunakan sebagai dasar 
+penyusunan laporan yang dibutuhkan 
+pimpinan . 
+• proses pencarian data membutuhkan 
+waktu yang relative lama. 
+Peluang ( Opportunity ) Ancaman ( Threat ) 
+• perkembangan teknologi informasi 
+memungkinkan penerapan sistem  
+informasi berbasis web . 
+• risiko kehilangan atau kerusakan data 
+jika tidak dikelola dengan baik. 
+• sistem informasi dapat meningkatkan 
+efisiensi dan efektivitas pengelolaan 
+data PBB . 
+• ketergantungan pada proses manual 
+dapat memperlambat pelayanan . 
+• laporan dapat dihasilkan secara lebih 
+cepat dan akurat .  
+• kesalahan data dapat berdampak pada 
+ketidakpastian laporan pajak . 
+ 
+3.2  Usulan Sistem Baru 
+3.2.1 Use Case Diagram 
+  Use Case Diagram digunakan untuk menggambarkan interaksi antara aktor dengan 
+sistem informasi Pajak Bumi dan Bangunan. Diagram ini menunjukkan fungsi -fungsi 
+utama yang dapat dilakukan oleh pengguna sistem.  Selain itu, Use Case Diag ram juga 
+membantu dalam mengidentifikasi kebutuhan sistem dari sudut pandang pengguna. 
+Dengan adanya diagram ini, pengembang dapat memahami peran masing -masing aktor 
+serta batasan sistem yang dirancang. 
+Hal ini memudahkan dalam proses perancangan dan penge mbangan sistem agar 
+sesuai dengan kebutuhan yang diharapkan.  Diagram ini juga berfungsi sebagai alat 
+komunikasi antara pengembang dan pihak terkait dalam memahami alur kerja sistem secara 
+keseluruhan. Dengan visualisasi yang jelas, setiap fungsi yang tersedia dalam sistem dapat 
+lebih mudah dipahami. Sehingga, proses pengembangan sistem dapat dilakukan secara 
+lebih terarah dan sistematis. 
+
+===== PAGE 39 =====
+xxxix 
+ 
+ 
+Gambar  3.2  use diagram 
+
+
+===== PAGE 40 =====
+xl 
+ 
+Table 3.2 use case diagram 
+No  Aktor Deskripsi 
+1 Petugas  Petugas melakukan login untuk mengakses sistem. 
+2 Pimpinan Melihat laporan PBB. 
+ 
+Berdasarkan tabel tersebut, terdapat dua aktor yang berinteraksi dengan sistem 
+informasi Pajak Bumi dan Bangunan, yaitu petugas dan pimpinan. Petugas memiliki peran 
+untuk melakukan login ke dalam sistem sebagai tahap awal untuk mengakses dan 
+mengelola data yang tersedia sesuai dengan tugasnya. Sementara itu, pimpinan berperan 
+dalam melihat laporan PBB yang telah dihasilkan oleh sistem sebagai bahan evaluasi dan 
+pengambilan keputusan. Dengan adanya pembagian peran ini, sistem dapat digunakan 
+secara lebih terstruktur sesuai dengan kebutuhan masing-masing pengguna. 
+
+===== PAGE 41 =====
+xli 
+ 
+ 
+ 
+No  Use case  Deskripsi  
+1 login Use ini digunakan oleh aktor untuk masuk ke 
+dalam sistem Pajak Bumi dan Bangunan dengan 
+cara memasukkan username dan password yang 
+valid. Sistem akan melakukan proses verifikasi 
+data pengguna. Apabila data yang dimasukkan 
+benar, maka pengguna dapat mengakses sistem 
+sesuai dengan hak akses masing-masing. Jika data 
+tidak valid, sistem akan menampilkan pesan 
+kesalahan. 
+2 Mengelola data wajib pajak  Use case ini digunakan oleh petugas untuk 
+melakukan pengelolaan data wajib pajak. Proses 
+yang dilakukan meliputi penambahan data wajib 
+pajak baru, pengubahan data wajib pajak, 
+penghapusan data wajib pajak, serta melihat data 
+wajib pajak yang telah tersimpan dalam sistem. 
+Data yang dikelola akan digunakan sebagai dasar 
+dalam pengolahan Pajak Bumi dan Bangunan. 
+3 Mengelola data objek pajak  Use case ini digunakan oleh petugas untuk 
+mengelola data objek pajak yang dimiliki oleh 
+wajib pajak. Pengelolaan data meliputi input data 
+objek pajak, perubahan data objek pajak, serta 
+penghapusan data objek pajak apabila diperlukan. 
+Data objek pajak ini mencakup informasi tanah 
+dan bangunan yang menjadi dasar perhitungan 
+Pajak Bumi dan Bangunan. 
+4 Memproses data pbb Use case ini digunakan oleh petugas untuk 
+melakukan proses pengolahan data Pajak Bumi 
+dan Bangunan berdasarkan data wajib pajak dan 
+data objek pajak yang telah tersimpan. Sistem 
+akan menghitung nilai Pajak Bumi dan Bangunan 
+sesuai dengan ketentuan yang berlaku dan 
+menghasilkan data PBB yang siap untuk 
+dilaporkan. 
+5 Melihat laporan pbb Use case ini digunakan oleh petugas dan 
+pimpinan untuk melihat laporan Pajak Bumi dan 
+Bangunan yang dihasilkan oleh sistem. Laporan 
+yang ditampilkan berupa rekapitulasi data PBB 
+yang telah diproses. Pimpinan hanya memiliki 
+hak akses untuk melihat laporan tanpa dapat 
+melakukan perubahan data. 
+6 logout Use case logout digunakan oleh petugas dan 
+pimpinan untuk keluar dari sistem Pajak Bumi 
+dan Bangunan setelah selesai menggunakan 
+sistem. Proses logout bertujuan untuk mengakhiri 
+sesi penggunaan sistem sehingga keamanan data 
+tetap terjaga. Setelah logout, pengguna tidak dapat 
+lagi mengakses fitur sistem kecuali melakukan 
+proses login kembali. 
+
+===== PAGE 42 =====
+xlii 
+ 
+3.2.2 Skenario Use Case 
+1.skenario use case login  
+Table 3.3 usecase login 
+ 
+2.skenario mengelola data wajib pajak 
+Table 3.4 mengelola data wajib pajak 
+ 
+Elemen  Deskripsi 
+Use case nama Login 
+aktor Petugas,pimpinan 
+description Proses masuk ke dalam sistem informasi pajak bumi dan bangunan 
+dengan memasukan username  dan password 
+presendition Pengguna belum masuk ke sistem 
+Main flow 1.pengguna membuka halaman login 
+ 2.pengguna memasukan username dan password 
+ 3.sistem melakukan verifikasi data login 
+ 4.sistem menampilkan halaman utama sesuai hak akses 
+Alternative flow Jika username atau password salah,sistem menampilkan pesan kesalahan 
+postcondition Pengguna berhasil masuk kedalam sistem 
+                        elemen                                Deskripsi 
+Use case name  Manage taxpayer data 
+Actor Petugas 
+description Proses pengolahaan data wajib pajak yang 
+dilakakukan oleh petugas 
+precondition Petugas telah loginke dalam sitem 
+Main flow 1.petugas memilih menu data wajib pajak 
+2.petugas menambah,mengubah,atau 
+menghapus data wajib pajak 
+3.sistem menyimpan data wajib pajak 
+Alternative flow Jika data tidak lengkap , ssistem menampilkan 
+pesan kesalahan 
+postcondition Data wajib pajak tersimpan didalam sistem 
+
+===== PAGE 43 =====
+xliii 
+ 
+3.skenario use case mengelola data objek pajak  
+Table 3.5 mengelola objek pajak 
+                                Element  Deskripsi  
+Use came Manage tax objek data 
+Actor  Petugas  
+Description  Proses pengelolaan data objek pajak bumi dan 
+bangunan 
+Precondition  Petugas telah login kedalam sistem  
+Main flow    1.petugas memilih menu data objek pajak 
+2.petugas menambah,mengubah, atau 
+menghapus data objek pajak  
+3.sistem menyimpan data objek pajak. 
+Alternative  Jika data objek pajak tidak lengkap, sistem 
+menampilkan pesan kesalahan 
+Postcondition  Data objek pajak tersimpan di dalam sistem  
+ 
+4.skenario use case  memproses data pbb  
+Table 3.6 memproses data pbb 
+Elemen Deskripsi 
+Use Case Name Process PBB Data 
+Actor Petugas 
+Description Proses pengolahan dan perhitungan Pajak Bumi dan Bangunan berdasarkan 
+data wajib pajak dan objek pajak 
+Precondition Data wajib pajak dan objek pajak telah tersedia 
+Main Flow 
+1. Petugas memilih menu proses PBB 
+2. Sistem menghitung nilai PBB secara otomatis 
+3. Sistem menyimpan hasil perhitungan 
+Alternative 
+Flow Jika data tidak valid, sistem menampilkan pesan kesalahan 
+Postcondition Data PBB berhasil diproses dan tersimpan 
+ 
+ 
+
+===== PAGE 44 =====
+xliv 
+ 
+5.skenario use case melihat laporan pbb 
+Table 3.7 melihat laporan pbb 
+Elemen Deskripsi 
+Use Case Name View PBB Report 
+Actor Petugas, Pimpinan 
+Description Proses melihat laporan Pajak Bumi dan Bangunan yang dihasilkan oleh 
+sistem 
+Precondition Pengguna telah login ke dalam sistem 
+Main Flow 
+1. Pengguna memilih menu laporan PBB 
+2. Sistem menampilkan laporan PBB 
+Alternative 
+Flow Jika data laporan tidak tersedia, sistem menampilkan informasi kosong 
+Postcondition Laporan PBB berhasil ditampilkan 
+ 
+ 
+6.skenario use case logout 
+Table 3.8 logout 
+Elemen Deskripsi 
+Use Case Name Logout 
+Actor Petugas, Pimpinan 
+Description Proses keluar dari sistem informasi Pajak Bumi dan Bangunan 
+Precondition Pengguna sedang login 
+Main Flow 
+1. Pengguna memilih menu logout 
+2. Sistem mengakhiri sesi pengguna 
+
+===== PAGE 45 =====
+xlv 
+ 
+Elemen Deskripsi 
+Postcondition Pengguna berhasil keluar dari sistem 
+3.2.3 Analisis Activity Diagram 
+Activity diagram digunakan untuk menggambarkan alur aktivitas pengguna dalam 
+sistem pengolahan data Pajak Bumi dan Bangunan (PBB) yang diusulkan. Diagram ini 
+menunjukkan setiap aktivitas yang dilakukan oleh pengguna dan sistem secara berurutan, 
+mulai dari proses login hingga proses logout. Analisis activity diagram dilakukan untuk 
+menjelaskan setiap aktivitas yang terdapat pada diagram secara rinci. 
+3.2.3.1 Activity login  
+ 
+Gambar 3.3 Activity Diagram Login Sistem PBB 
+ 
+
+
+===== PAGE 46 =====
+xlvi 
+ 
+Gambar tersebut merupakan Activity Diagram login sistem PBB yang 
+menggambarkan alur proses login antara aktor dan sistem. Proses dimulai dari aktor yang 
+mengakses sistem, kemudian memasukkan user name dan password sebagai data 
+autentikasi. Selanjutnya, sistem akan memproses data yang dimasukkan untuk dilakukan 
+validasi. 
+Apabila data yang diinput tidak sesuai, maka sistem akan menampilkan pesan error 
+dan pengguna diminta untuk menginput ulang  username dan password. Proses ini akan 
+berulang sampai data yang dimasukkan benar. Diagram ini menunjukkan adanya interaksi 
+yang jelas antara pengguna dan sistem dalam proses login untuk memastikan keamanan 
+akses ke dalam sistem. 
+3.2.3.2 Activity Mengelola Data Wajib Pajak 
+ 
+ 
+
+
+===== PAGE 47 =====
+xlvii 
+ 
+Gambar 3.4  Ativity diagram pengelolaan data wajib pajak 
+Gambar tersebut merupakan Activity Diagram Mengelola Data Wajib Pajak yang 
+menggambarkan alur interaksi antara aktor dan sistem dalam proses pengolahan data. 
+Proses dimulai dari  aktor yang memilih menu data wajib pajak pada sistem. Setelah itu, 
+aktor melakukan input data wajib pajak sesuai dengan informasi yang diperlukan. 
+Selanjutnya, sistem akan menerima data yang telah diinput dan melakukan proses 
+penyimpanan ke dalam database. Setelah data berhasil disimpan, proses dinyatakan selesai. 
+Diagram ini menunjukkan alur kerja yang sederhana dan terstruktur dalam pengelolaan 
+data wajib pajak, sehingga memudahkan pengguna dalam melakukan input dan 
+penyimpanan data secara sistematis. 
+Selain itu, diagram ini juga memperlihatkan adanya pembagian peran yang jelas 
+antara aktor sebagai pengguna dan sistem sebagai pengolah data. Aktor berfokus pada 
+proses penginputan data, sedangkan sistem bertanggung jawab dalam menyimpan dan 
+mengelola data tersebut ke dalam database. Hal ini menunjukkan bahwa setiap komponen 
+memiliki fungsi masing-masing dalam mendukung kelancaran proses pengolahan data. 
+Dengan adanya alur yang terstruktur tersebut, proses pengelolaan data wajib pajak 
+dapat dilakukan dengan l ebih efisien dan terorganisir. Sistem yang digunakan membantu 
+meminimalisir kesalahan dalam pencatatan data serta mempermudah proses penyimpanan 
+dan pencarian data di kemudian hari. Sehingga, kinerja dalam pengelolaan data menjadi 
+lebih optimal dan efektif. 
+ 
+
+===== PAGE 48 =====
+xlviii 
+ 
+ 
+3.2.3.3 Aktivity Mengelola Data Objek Pajak  
+ 
+ 
+Gambar  3.5  Activity diagram pengelolahan data objek pajak 
+Gambar tersebut merupakan Activity Diagram Mengelola Data Objek Pajak yang 
+menggambarkan alur proses interaksi antara aktor dan sistem dalam pengolahan data objek 
+pajak. Proses dimulai dari aktor yang memilih menu data objek pajak pada sistem. Setelah 
+itu, aktor melakukan proses penyimpanan data objek pajak sesuai dengan informasi yang 
+diperlukan. Selanjutnya, sistem akan memproses data y ang telah dimasukkan dan 
+memberikan respon berupa notifikasi bahwa data berhasil disimpan. Notifikasi tersebut 
+menjadi tanda bahwa proses penyimpanan data telah berjalan dengan baik. 
+
+
+===== PAGE 49 =====
+xlix 
+ 
+3.2.3.4 Aktivity Pengolahan Data Pajak Bumi dan Bangunan 
+ 
+ 
+Gambar 3.6 Activity diagram pengelolahan data pbb 
+Gambar tersebut merupakan Activity Diagram Pengolahan Data Pajak Bumi dan 
+Bangunan (PBB) yang menggambarkan alur proses antara aktor dan sistem. Proses dimulai 
+dari aktor yang memulai proses pengolahan data PBB. Sete lah itu, aktor melakukan input 
+nilai pajak sesuai dengan data yang telah tersedia. Selanjutnya, sistem akan menerima data 
+yang telah diinput dan melakukan proses penyimpanan ke dalam database. Setelah data 
+berhasil disimpan, proses pengolahan data dinyatak an selesai. Diagram ini menunjukkan 
+alur kerja yang sederhana dan terstruktur dalam pengolahan data PBB. 
+
+
+===== PAGE 50 =====
+l 
+ 
+3.2.3.5 Aktivity Laporan PBB  
+ 
+ 
+Gambar 3.7 Activity diagram laporan pbb 
+Gambar tersebut merupakan activity diagram laporan PBB yang menunjukkan 
+alur proses antara aktor (pengguna) dan sistem. Proses dimulai ketika aktor memilih 
+menu laporan PBB, lalu dilanjutkan dengan memilih kriteria laporan. Setelah itu, sistem 
+memproses pilihan tersebut dan menghasilkan tampilan atau cetak laporan PBB. Proses 
+berakhir setelah laporan berhasil ditampilkan atau dicetak. Diagram ini juga 
+memperlihatkan alur kerja yang terstruktur dari awal hingga akhir proses. Selain itu, 
+pembagian antara aktor dan sistem menunjukkan peran masing-masing dalam 
+menjalankan proses tersebut. 
+
+
+===== PAGE 51 =====
+li 
+ 
+3.2.3.6 Aktivity Logout  
+ 
+ 
+Gambar 3.8 Activity diagram logout 
+Gambar tersebut merupakan activity diagram logout yang menunjukkan alur proses 
+antara aktor (pengguna) dan sistem. Proses dimulai ketika aktor memilih menu laporan, 
+kemudian dilanjutkan dengan memilih logout. Setelah itu, sistem akan memproses perintah 
+tersebut dan melakukan keluar dari sistem. Proses berakhir setelah pengguna berhasil 
+logout dari sistem.  Diagram ini juga menggambarkan urutan aktivitas yang dilakukan 
+secara s istematis. Selain itu, terlihat adanya interaksi antara aktor dan sistem dalam 
+menyelesaikan proses logout tersebut. 
+
+
+===== PAGE 52 =====
+lii 
+ 
+3.3 Perancangan Sistem 
+Perancangan sistem merupakan tahap penerjemahan kebutuhan sistem ke dalam 
+bentuk desain yang lebih terstruktur sebagai acuan pengembangan sistem.  Tahap ini 
+membantu dalam menggambarkan bagaimana sistem akan dibangun dan dijalankan sesuai 
+dengan kebutuhan yang telah dianalisis. Selain itu, perancangan sistem juga menjadi dasar 
+dalam pembuatan komponen sistem agar lebih terarah dan sistematis. Perancangan sistem 
+juga mempermudah proses implementasi karena sudah memiliki gambaran yang jelas. 
+Dengan adanya perancangan yang baik, kesalahan dalam pengembangan sistem dapat 
+diminimalkan. 
+3.3.1 Perancangan Sequence Diagram 
+Sequence diagram menggambarkan alur interaksi antar objek dalam sistem 
+berdasarkan urutan waktu, seperti proses login, pengolahan data PBB, dan pembuatan 
+laporan. Diagram ini menunjukkan bagaimana pesan atau proses dikirim antar objek dari 
+awal hingga akhir. Dengan adanya sequence diagram, alur komunikasi dalam sistem dapat 
+dipahami dengan lebih jelas dan terstruktur. Diagram ini juga membantu dalam 
+mengidentifikasi hubungan antar objek dalam sistem.  Selain itu, sequence diagram 
+memudahkan dalam memahami urutan proses yang terjadi dalam sistem. Diagram ini juga 
+dapat digunakan sebagai acuan dalam pengembangan dan pengujian sistem. 
+ 
+ 
+ 
+ 
+
+===== PAGE 53 =====
+liii 
+ 
+ 
+Gambar 3.9  sequence diagram  sistem PBB 
+Gambar tersebut merupakan sequence diagram sistem PBB yang menggambarkan 
+alur interaksi antar objek berdasarkan urutan waktu. Proses dimulai dari halaman login, 
+dimana pengguna memasukkan username dan password untuk dilakukan validasi login 
+oleh sistem ke database. Setelah data pengguna valid, sistem menampilkan dashboard dan 
+pengguna dapat melakukan pengelolaan data PBB, seperti menyimpan atau mengupdate 
+data ke database. Selanjutnya, pengguna dapat meminta laporan, kemudian sistem 
+mengambil data dari database dan menampilkan laporan PBB. Proses diakhiri dengan 
+pengguna melakukan logout dari sistem. 
+ 
+
+
+===== PAGE 54 =====
+liv 
+ 
+ 
+3.3.2     suquence diagram pengolahan data  PBB 
+ 
+ 
+ 
+Gambar  3.10  sequence diagram pengolahan data PBB 
+Gambar tersebut merupakan sequence diagram pengolahan data PBB yang 
+menggambarkan alur interaksi antara petugas, sistem PBB, dan database. Proses dimulai 
+ketika petugas memilih menu pengolahan data PBB, kemudian sistem menampilkan form 
+input untuk memasukkan data. Selanjutnya, petugas melakukan input data wajib pajak, lalu 
+sistem menyimpan data tersebut ke d alam database hingga data tersimpan. Setelah itu, 
+dilakukan input data objek pajak dan dilanjutkan dengan proses perhitungan PBB oleh 
+sistem. Proses diakhiri ketika seluruh data berhasil diproses dan petugas dapat melakukan 
+logout dari sistem. 
+
+
+===== PAGE 55 =====
+lv 
+ 
+ 
+3.3.3 sequence laporan PBB  
+ 
+ 
+ 
+ 
+Gambar 3.11   diagram laporan PBB 
+Gambar tersebut merupakan sequence diagram laporan PBB yang 
+menggambarkan alur interaksi antara petugas, sistem PBB, dan database. Proses dimulai 
+ketika petugas memilih menu laporan, kemudian sistem melakukan pengambilan data 
+PBB dari database. Setelah data diperoleh, sistem melakukan generate laporan dan 
+menampilkan tampilan laporan PBB kepada pengguna. Selanjutnya, sistem juga 
+melakukan penyimpanan nilai PBB ke dalam database hingga data tersimpan. Proses 
+diakhiri ketika seluruh laporan berhasil ditampilkan dan petugas dapat melakukan logout 
+dari sistem. 
+
+
+===== PAGE 56 =====
+lvi 
+ 
+3.3.4 Perancangan Class Diagram 
+Class diagram menggambarkan struktur kelas dan hubungan antar kelas dalam 
+sistem pengolahan data Pajak Bumi dan Bangunan. Diagram ini menjadi dasar dalam 
+perancangan database dan logika sistem. Class Diagram digunakan untuk menggambarkan 
+struktur sistem serta hubungan antar kelas dalam Sistem Informasi Pengolahan Data Pajak 
+Bumi dan Bangunan (PBB). Diagram ini menunjukkan atribut, metode (fungsi), serta relasi 
+antar kelas yang saling berinteraksi dalam proses pengolahan data. 
+Pada sistem ini terdapat lima kelas utama, yaitu: 
+1. Class User 
+Class User merepresentasikan pengguna sistem, yaitu petugas dan pimpinan.  
+Kelas ini memiliki atribut: 
+a. id_user 
+b. username 
+c. password 
+d. role 
+Metode yang terdapat pada kelas ini adalah: 
+login() 
+logout() 
+Class User berfungsi sebagai pengelola sistem yang dapat mengakses dan mengolah data 
+PBB sesuai dengan hak aksesnya. Class diagram ini juga memberikan gambaran yang jelas 
+mengenai struktur data yang digunakan dalam sistem, sehingga memudahkan dalam proses 
+
+===== PAGE 57 =====
+lvii 
+ 
+perancangan dan implementasi database. Dengan adanya diagram ini, hubungan antar kelas 
+dapat dipahami dengan lebih terstruktur dan sistematis. 
+Selain itu, class diagram membantu dalam menentukan fungsi atau metode yang dimiliki 
+oleh setiap kelas dalam sistem. Hal ini mempermudah pengembang dalam 
+mengimplementasikan logika program sesuai dengan kebutuhan sistem yang tela h 
+dirancang. Dengan adanya class diagram, proses pengembangan sistem menjadi lebih 
+terarah karena setiap komponen sudah memiliki peran dan tanggung jawab masing-masing. 
+Diagram ini juga dapat digunakan sebagai acuan dalam proses pengujian dan 
+pengembangan lebih lanjut. 
+2. Class WajibPajak 
+Class WajibPajak digunakan untuk menyimpan data wajib pajak. Atribut yang dimiliki 
+antara lain: 
+a. id_wp 
+b. nama_wp 
+c. Alamat 
+d. no_ktp 
+Metode yang tersedia: 
+tambahData() 
+ubahData() 
+hapusData() 
+
+===== PAGE 58 =====
+lviii 
+ 
+Class ini dikelola oleh User dan menjadi  dasar dalam pengelolaan objek pajak.  
+Class ini juga berperan penting dalam menjaga keakuratan dan kelengkapan data wajib 
+pajak yang tersimpan dalam sistem. Dengan adanya atribut yang jelas, data dapat diolah 
+dan digunakan secara efektif dalam proses selan jutnya. Selain itu, metode yang tersedia 
+pada class ini memudahkan pengguna dalam melakukan pengelolaan data, seperti 
+menambah, mengubah, dan menghapus data sesuai kebutuhan. Hal ini mendukung proses 
+pengolahan data PBB agar berjalan dengan lebih terstruktur dan efisien. 
+3. Class ObjekPajak 
+Class ObjekPajak merepresentasikan objek pajak yang dimiliki oleh wajib pajak. Atribut 
+yang terdapat pada kelas ini adalah: 
+a. id_objek 
+b. nop 
+c. Lokasi 
+d. luas_tanah 
+e. luas_bangunan 
+f. Metode yang tersedia: 
+g. simpanObjek() 
+h. updateObjek() 
+Setiap wajib pajak dapat memiliki satu atau lebih objek pajak. Class ini berfungsi untuk 
+menyimpan informasi detail terkait objek pajak secara lengkap dan terstruktur. Dengan 
+adanya data seperti luas tanah dan luas bangunan, sistem dapat mengelola informasi objek 
+pajak dengan lebih akurat. Selain itu, metode yang tersedia memungkinkan pengguna 
+
+===== PAGE 59 =====
+lix 
+ 
+untuk menambahkan dan memperbarui data objek pajak sesuai dengan kondisi yang ada. 
+Hal ini mendukung proses pengolahan data PBB agar berjalan dengan leb ih efektif dan 
+terorganisir. 
+4. Class PBB 
+Class PBB berfungsi untuk menyimpan dan menghitung data Pajak Bumi dan 
+Bangunan berdasarkan objek pajak. Atribut yang dimiliki: 
+a. id_pbb 
+b. njop 
+c. tarif 
+d. total_pajak 
+e. Metode yang tersedia: 
+f. hitungPajak() 
+Nilai total pajak dihitung berdasarkan NJOP dan tarif yang berlaku. Class ini memiliki 
+peran penting dalam proses perhitungan pajak secara sistematis dan akurat. Dengan adanya 
+atribut seperti NJOP dan tarif, sistem dapat menghasilkan nilai pajak yang sesuai dengan 
+ketentuan y ang berlaku. Selain itu, metode hitungPajak() memudahkan sistem dalam 
+melakukan perhitungan secara otomatis tanpa perlu dilakukan secara manual. Hal ini 
+membantu meningkatkan efisiensi dan mengurangi kemungkinan kesalahan dalam 
+perhitungan pajak. 
+ 
+ 
+ 
+
+===== PAGE 60 =====
+lx 
+ 
+5. Class Laporan 
+Class Laporan digunakan untuk menghasilkan rekapitulasi data PBB. Atribut yang 
+terdapat pada kelas ini adalah: 
+a. id_laporan 
+b. periode 
+c. total_penerimaan 
+Metode yang tersedia: 
+generateLaporan() 
+cetakLaporan() 
+Class ini digunakan oleh petugas dan pimpinan untuk melihat total penerimaan pajak 
+berdasarkan periode tertentu.  Relasi antar class hubungan antar kelas dalam sistem ini 
+adalah sebagai berikut: 
+User mengelola WajibPajak 
+WajibPajak memiliki ObjekPajak 
+ObjekPajak menghasilkan PBB 
+PBB digunakan dalam Laporan 
+Relasi ini menunjukkan bahwa proses pengolahan data dimulai dari pengelolaan 
+data wajib pajak hingga menghasilkan laporan penerimaan PBB.  Class Laporan berperan 
+penting dalam menyajikan informasi hasil pengolahan data PBB secara ringkas dan 
+
+===== PAGE 61 =====
+lxi 
+ 
+terstruktur. Dengan adanya laporan, pengguna dapat dengan mudah memahami hasil 
+perhitungan dan total penerimaan pajak dalam periode tertentu. Selain itu, relasi antar class 
+yang terhubung ini membantu memastikan bahwa alur data dalam sistem berjalan secara 
+terintegrasi. Hal ini memudahkan dalam pengelolaan, pemantauan, serta pengembangan 
+sistem secara keseluruhan. 
+ 
+                                    
+ 
+
+
+===== PAGE 62 =====
+lxii 
+ 
+Gambar   3.12  class diagram sistem PBB 
+Class diagram tersebut menggambarkan struktur sistem Pajak Bumi dan Bangunan 
+(PBB) yang terdiri dari beberapa kelas utama beserta atribut, method, dan hubungan antar 
+kelas. Pertama, terdapat aktor petugas/pimpinan yang berinteraksi dengan sistem. Aktor ini 
+menggunakan sistem melalui kelas user. Pada kelas user terdapa t atribut seperti id_user, 
+username, password, dan role. Selain itu, terdapat method login() dan logout() yang 
+berfungsi untuk proses autentikasi pengguna ke dalam sistem. Selanjutnya, user terhubung 
+dengan Sistem PBB yang berfungsi sebagai penghubung utam a dalam pengolahan data. 
+Pada bagian ini terdapat proses tampil form input yang digunakan untuk memasukkan data 
+terkait PBB. 
+Kemudian sistem terhubung dengan Database yang menyimpan data objek pajak. 
+Database memiliki atribut seperti id_objek, nop, lokasi,  luas_tanah, dan luas_bangunan. 
+Database juga memiliki method simpan objek() dan update objek() yang digunakan untuk 
+menyimpan dan memperbarui data.  Di bagian lain terdapat kelas Wajib Pajak, yang 
+menyimpan informasi wajib pajak seperti id_wp, nama_wp, alamat, dan no_ktp. Kelas ini 
+memiliki method tambah data(), ubah data(), dan hapus data() untuk mengelola data wajib 
+pajak. Kelas Objek Pajak berisi informasi mengenai objek yang dikenakan pajak, seperti 
+id_objek, lokasi, luas_tanah, dan luas_bangunan. Kelas  ini juga memiliki method simpan 
+objek() dan update objek().  Selanjutnya terdapat kelas PBB yang berfungsi untuk 
+
+===== PAGE 63 =====
+lxiii 
+ 
+menghitung pajak. Atribut yang dimiliki antara lain id_pbb, njop, tarif, dan total_pajak. 
+Method hitung pajak() digunakan untuk menghitung besaran pajak berdasarkan data yang 
+ada. Terakhir, terdapat kelas Laporan yang digunakan untuk menampilkan hasil 
+rekapitulasi pajak.  
+3.3.5   Entity Relationship Diagram  
+ERD digunakan untuk menggambarkan hubungan antar entitas dalam basis data 
+Sistem Informasi PBB. 
+Entitas: 
+• user 
+• wajib_pajak 
+• objek_pajak 
+• pbb 
+• laporan 
+Relasi: 
+• User mengelola Wajib Pajak 
+• Wajib Pajak memiliki banyak Objek Pajak (1:M) 
+• Objek Pajak memiliki data PBB (1:M) 
+• Data PBB direkap dalam Laporan 
+ 
+
+===== PAGE 64 =====
+lxiv 
+ 
+ 
+Gambar   3.13        Entity Relationship Diagram 
+Entity Relationship Diagram (ERD) Sistem Informasi PBB menggambarkan 
+struktur basis data yang terdiri dari beberapa entitas utama yaitu user, wajib pajak, objek 
+pajak, pbb, dan laporan yang saling berhubungan. Entitas us er memiliki atribut id_user 
+sebagai primary key serta username, password, dan role yang digunakan untuk mengatur 
+
+
+===== PAGE 65 =====
+lxv 
+ 
+hak akses sistem. Entitas wajib pajak menyimpan data seperti id_wp, nama_wp, alamat, 
+dan no_ktp, yang kemudian terhubung dengan entitas objek p ajak melalui id_wp sebagai 
+foreign key, menunjukkan bahwa satu wajib pajak dapat memiliki lebih dari satu objek 
+pajak. Entitas objek pajak memiliki atribut seperti id_objek, njop, lokasi, luas_tanah, dan 
+luas_bangunan, yang selanjutnya terhubung ke entitas  pbb melalui id_objek untuk 
+menyimpan data perhitungan pajak seperti id_pbb, njop, tarif, total_pajak, dan tahun. Data 
+dari entitas pbb kemudian digunakan dalam entitas laporan yang berisi id_laporan, periode, 
+dan total_penerimaan untuk merekap hasil pener imaan pajak, sehingga keseluruhan ERD 
+ini menunjukkan alur keterkaitan data dari pengguna, wajib pajak, objek pajak, hingga 
+perhitungan dan pelaporan PBB. 
+3.3.6  Perancangan Database 
+Perancangan database merupakan tahap perancangan struktur penyimpanan dat a 
+yang akan digunakan dalam Sistem Informasi Pengolahan Data Pajak Bumi dan Bangunan 
+(PBB). Database dirancang untuk menyimpan seluruh data yang berkaitan dengan 
+pengguna sistem, wajib pajak, objek pajak, perhitungan PBB, serta laporan penerimaan 
+pajak. Pada tahap ini juga dilakukan penentuan entitas, atribut, serta relasi antar tabel agar 
+data yang disimpan dapat terorganisir dengan baik. Selain itu, perancangan database 
+bertujuan untuk meminimalkan terjadinya redundansi data serta menjaga konsistensi dan 
+integritas data. Dengan adanya perancangan database yang baik, proses pengolahan, 
+pencarian, dan pelaporan data dapat dilakukan secara lebih efektif dan efisien sesuai 
+kebutuhan sistem. 
+Perancangan database dilakukan dengan tujuan untuk: 
+
+===== PAGE 66 =====
+lxvi 
+ 
+1. Menjamin integritas dan konsistensi data. 
+2. Meminimalkan terjadinya redundansi data. 
+3. Mempermudah proses pengolahan dan pencarian data. 
+4. Mendukung proses pembuatan laporan secara cepat dan akurat. 
+Database dalam sistem ini terdiri dari beberapa tabel yang saling berelasi. Adapun struktur 
+tabel yang digunakan adalah sebagai berikut: 
+         3.2.3.7  Table user  
+ 
+Nama table : use 
+Primary key: id_user  
+ 
+ 
+Table 3.9 user 
+No  Filed  Type  Size  Primary  
+1 Id_user  INT 11 Primary key 
+2 Username  VARCHAR 50 Nama pengguna 
+3 password VARCHAR 255 Kata sandi pengguna 
+4 role VARCHAR 20 Hak akses 
+(petugas/pimpinan) 
+ 
+Table user digunakan untuk menyimpan data pengguna sistem yang 
+memiliki hak akses untuk login dan mengelola data PBB . Setiap pengguna 
+memiliki id_user yang bersifat unik sebagai penanda utama dalam sistem. Data 
+username dan password digunakan dalam proses autentikasi saat pengguna masuk 
+ke dalam sistem. Sementara itu, atribut role berfungsi untuk membedakan hak akses 
+antara petugas dan pimpinan d alam menggunakan fitur yang tersedia. Dengan 
+adanya tabel ini, pengelolaan akses sistem dapat dilakukan secara terstruktur dan 
+lebih aman. 
+
+===== PAGE 67 =====
+lxvii 
+ 
+ 
+ 
+ 
+                 3.2.3.8 Table wajib pajak  
+         
+     
+ Nama table : wajib pajak  
+ Primary key : id_wp 
+ 
+ 
+Table. 3.10 wajib pajak 
+No  Filed  type Size  Primary  
+1 Id_wp INT 11 Primary key  
+2 Nama_wp VARCHAR 100 Nama wajib pajak  
+3 Alamat  TEXT - Alamat wajib pajak 
+4 No_ktp  VARCHAR 20 No ktp 
+ 
+ 
+Table wajib pajak digunakan untuk menyimpan data identitas wajib pajak 
+yang teraftar dalam sistem.  Setiap data wajib pajak memiliki id_wp yang 
+bersifat unik sebagai penanda utama. Informasi seperti nama_wp, alamat, dan 
+no_ktp digunakan untuk mengidentifikasi serta membedakan setiap wajib 
+pajak. Data pada  tabel ini juga menjadi acuan dalam pengelolaan data objek 
+pajak yang dimiliki oleh masing-masing wajib pajak. Dengan adanya tabel ini, 
+pendataan wajib pajak dapat dilakukan secara lebih terstruktur dan mudah 
+dikelola. 
+ 
+ 
+ 
+ 
+
+===== PAGE 68 =====
+lxviii 
+ 
+             
+ 
+3.2.3.9  Table objek pajak  
+ Nama table : objek_pajak 
+ Primary key : id_objek  
+  Foreign key : id_wp 
+                                                                             Table 3.11 objek pajak  
+No  Filed  Type  Size  Primary  
+1 Id_objek  INT 11 Primary key  
+2 Id_wp INT 11 Foreign key (wajib_pajak) 
+3 Nop  VARCHAR 30 Nama nomer objek pajak 
+4 lokasi VARCHAR 150 Lokasi objek pajak 
+5 Luas_tanah DOUBLE - Luas tanah 
+6 Luas_bangunan  DOUBLE - Luas bangunan 
+ 
+Table objek pajak menyimpan data objek pajak yang dimiliki oleh wajib pajak . setiap 
+objek pajak terhubung dengan satu wajib pajak melalui id_wp sebagai foreign key. Atribut 
+seperti nop, lokasi, luas_tanah, dan luas_bangunan digunakan untuk memberikan informasi 
+detail mengenai objek pajak. Data pada tabel ini menjadi dasar dalam proses perhitungan 
+pajak PBB. Selain itu, dengan adanya relasi ke tabel wajib pajak, sistem dapat 
+mengelompokkan objek pajak berdasarkan pemiliknya. Hal ini memudahkan dalam 
+pengelolaan, pencarian, serta pelaporan data objek pajak secara lebih terstruktur. 
+ 
+ 
+3.2.3.10  Table PBB 
+   Nama table : PBB 
+   Primary key : id_pbb  
+   Foreign key : id_objek 
+
+===== PAGE 69 =====
+lxix 
+ 
+                                                               Table 3.12 pbb  
+No  Filed  Type  Size  Primary  
+1 Id_pbb INT 11 Primary key 
+2 Id_objek INT 11 Foreign key (objek_pajak) 
+3 Njop  DOUBLE - Nilai jual objek pajak 
+4 Tarif  DOUBLE - Tarif pajak  
+5 Total_pajak DOUBLE - Total pajak terhutang 
+6 tahun YEAR - Tahun pajak 
+ 
+Table PBB digunakan untuk menyimpan hasil perhitungan pajak bumi dan 
+bangunan berasarkan data objek pajak yang telah diinput. Setiap data PBB memiliki id_pbb 
+sebagai identitas unik dan terhubung dengan tabel objek_pajak melalui id_objek. Atribut 
+seperti njop dan tarif digunakan sebagai dasar dalam menghitung total_pajak yang harus 
+dibayarkan. Informasi tahun digunakan untuk menandai periode pajak yang berlaku. Data 
+pada tabel ini sangat penting karena menjadi acuan dalam proses pelaporan dan evaluasi 
+penerimaan pajak. Dengan adanya tabel ini, perhitungan dan pencatatan pajak dapat 
+dilakukan secara sistematis dan terstruktur. 
+3.2.3.11  Table laporan           
+ Nama table : laporan  
+Primary key : id_laporan 
+                                                  Table 3.13 laporan 
+No  Filed  Type  Size  Primary  
+1 Id_laporan INT 11 Primary key 
+2 periode VARCHAR 20 Periode laporan 
+3 Total_penerimaan DOUBLE - Total penerimaan pajak 
+ 
+Table laporan digunakan untuk menyimpan data rekapitulasi penerimaan PBB berdasarkan 
+periode tertentu yang dihasilkan dari table PBB.  Setiap laporan memiliki id_laporan 
+sebagai identitas unik yang membedakan satu laporan dengan lap oran lainnya. Atribut 
+periode digunakan untuk menunjukkan rentang waktu laporan, seperti bulanan atau 
+
+===== PAGE 70 =====
+lxx 
+ 
+tahunan. Sedangkan total_penerimaan berisi jumlah keseluruhan pajak yang telah 
+dihimpun dalam periode tersebut. Data pada tabel ini membantu dalam proses monitoring 
+dan evaluasi penerimaan pajak. Selain itu, tabel laporan juga memudahkan pihak terkait 
+dalam melihat ringkasan data secara cepat dan terstruktur. 
+ 3.3.7    Struktur Menu 
+Perancangan struktur menu merupakan tahapan penting dalam pengembangan 
+sistem informasi karena berfungsi untuk menggambarkan susunan navigasi serta hubungan 
+antar menu yang terdapat dalam sistem. Struktur menu dirancang agar pengguna dapat 
+mengakses setiap fitur dengan mudah, terarah, dan sistematis sesuai dengan  kebutuhan 
+pengolahan data Pajak Bumi dan Bangunan (PBB). 
+Struktur menu pada Sistem Informasi Pengolahan Data PBB disusun secara 
+hierarkis, dimulai dari halaman utama (Dashboard) yang menjadi pusat navigasi menuju 
+menu-menu lainnya. Dengan menggunakan struktur berbentuk hierarki, sistem diharapkan 
+memiliki alur penggunaan yang jelas serta memudahkan pengguna dalam memahami 
+fungsi masing-masing menu. 
+Adapun menu utama yang terdapat pada sistem ini terdiri dari beberapa bagian, yaitu: 
+1. Dashboard 
+  Dashboard merupakan halaman utama yang ditampilkan setelah pengguna berhasil 
+melakukan login. Halaman ini berfungsi untuk memberikan gambaran umum mengenai 
+sistem, seperti jumlah data wajib pajak, jumlah objek pajak, serta ringkasan penerimaan 
+pajak. Dashboard juga menjadi pusat navigasi menuju menu lainnya. 
+
+===== PAGE 71 =====
+lxxi 
+ 
+2. Data Wajib Pajak 
+  Menu ini digunakan untuk mengelola seluruh data wajib pajak yang terdaftar 
+dalam sistem. Pada menu ini tersedia beberapa fitur, yaitu: 
+A. Tambah Data Wajib Pajak 
+B. Ubah Data Wajib Pajak 
+C. Hapus Data Wajib Pajak 
+Menu ini bertujuan untuk memastikan data wajib pajak tersimpan secara terstruktur 
+dan dapat diperbarui sesuai kebutuhan.  Melalui menu ini, pengguna dapat melakukan 
+pengelolaan data secara lebih mudah dan terorganisir. Setiap perubahan data dapa t 
+langsung disimpan ke dalam sistem sehingga informasi tetap akurat dan terkini. Selain itu, 
+menu ini juga membantu dalam meminimalkan kesalahan pencatatan data wajib pajak. 
+Dengan adanya fitur -fitur tersebut, proses pengelolaan data menjadi lebih efisien dan 
+sistematis. 
+3. Data Objek Pajak 
+  Menu Data Objek Pajak digunakan untuk mengelola informasi terkait objek pajak 
+yang dimiliki oleh wajib pajak. Fitur yang tersedia meliputi: 
+A. Tambah Data Objek Pajak 
+B. Ubah Data Objek Pajak 
+C. Hapus Data Objek Pajak 
+ 
+
+===== PAGE 72 =====
+lxxii 
+ 
+Pengelolaan objek pajak dilakukan agar proses perhitungan PBB dapat dilakukan 
+secara akurat berdasarkan data yang tersedia. Melalui menu ini, pengguna dapat mencatat 
+dan memperbarui informasi objek pajak seperti lokasi, luas tanah, dan luas bangunan. Data 
+yang tersimpan akan terhubung langsung dengan data wajib pajak sehingga memudahkan 
+dalam pengelompokan kepemilikan objek. Selain itu, menu ini juga membantu dalam 
+menjaga keakuratan dan kelengkapan data yang digunakan dalam perhitungan pajak. 
+Dengan pengelolaan yang baik, proses pencarian dan pelaporan data objek pajak dapat 
+dilakukan secara lebih efektif dan efisien. 
+4. Pengolahan PBB 
+  Menu ini digunakan untuk melakukan proses perhitungan Pajak Bumi dan 
+Bangunan berdasarkan data objek pajak yang telah dimasukkan sebelumnya. Fitur 
+yang tersedia pada menu ini antara lain: 
+A. Input NJOP 
+B. Perhitungan Pajak 
+C. Simpan Data Pajak 
+Menu ini berperan sebagai inti dari sistem karena berkaitan langsung dengan proses 
+penghitungan dan penyimpanan data PBB. Melalui menu ini, pengguna dapat memasukkan 
+nilai NJOP sebagai dasar perhitungan pajak yang harus dibayarkan. Sistem kemudian akan 
+menghitung total pajak secara otomatis berdasarkan tarif yang berlaku. Hasil perhitungan 
+tersebut dapat disimpan ke dalam database untuk keperluan pencatatan d an pelaporan. 
+Selain itu, menu ini juga membantu memastikan bahwa proses perhitungan dilakukan 
+
+===== PAGE 73 =====
+lxxiii 
+ 
+secara konsisten dan akurat. Dengan adanya fitur ini, pengolahan data PBB menjadi lebih 
+cepat, tepat, dan terintegrasi dengan data lainnya dalam sistem. 
+5. Laporan 
+  Menu Laporan berfungsi untuk menampilkan serta mencetak laporan data PBB 
+yang telah diolah. Fitur yang tersedia meliputi: 
+A. Lihat Laporan 
+B. Cetak Laporan 
+Menu ini membantu pihak terkait dalam melakukan monitoring serta 
+dokumentasi data penerimaan pajak. Melalui menu ini, pengguna dapat melihat 
+ringkasan data pajak berdasarkan periode tertentu secara lebih jelas dan 
+terstruktur. Fitur cetak laporan memudahkan dalam pembuatan dokumen fisik 
+yang dapat digunakan sebagai arsip atau bahan evaluasi. Selain itu, lapo ran 
+yang dihasilkan dapat menjadi dasar dalam pengambilan keputusan terkait 
+pengelolaan pajak. Dengan adanya menu ini, proses penyajian informasi 
+menjadi lebih cepat, rapi, dan mudah dipahami. 
+Dengan adanya struktur menu yang tersusun secara sistematis, diharapkan pengguna dapat 
+mengoperasikan sistem dengan lebih mudah dan efisien. Struktur menu ini menjadi dasar 
+dalam perancangan antarmuka sistem yang akan dijelaskan pada subbab berikutnya. 
+
+===== PAGE 74 =====
+lxxiv 
+ 
+ 
+ 
+Gambar  3.14  struktur menu 
+ 
+ 
+Gambar 3.14 menunjukkan struktur menu pada Sistem Pengolahan Data PBB yang 
+menggambarkan susunan navigasi dalam sistem. Pada bagian paling atas terdapat 
+Dashboard sebagai halaman utama yang menjadi pusat akses bagi pengguna setelah 
+berhasil login. Dari dashboard tersebut, pengguna dapat mengakses beberapa menu utama 
+yang tersedia di dalam sistem. Menu -menu tersebut tersusun secara hierarkis dan saling 
+terhubung untuk memudahkan navigasi pengguna. 
+Menu yang ditampilkan di bawah dashboard meliputi pengelolaan data seperti data 
+wajib pajak, data objek pajak, pengolahan PBB, serta laporan. Setiap menu memiliki fungsi 
+masing-masing sesuai dengan kebutuhan sistem, seperti mengelola data, melakukan 
+perhitungan pajak, hingga menampilkan laporan. Struktur ini diranca ng agar pengguna 
+dapat dengan mudah mengakses fitur yang dibutuhkan secara terorganisir.  
+
+
+===== PAGE 75 =====
+lxxv 
+ 
+3.3.8   Perancangan Interface 
+ 
+Perancangan antarmuka (interface) merupakan tahapan yang bertujuan untuk 
+menggambarkan tampilan sistem yang akan digunakan oleh penggun a. Antarmuka 
+dirancang sebagai media interaksi antara pengguna dengan sistem, sehingga harus dibuat 
+secara sederhana, mudah dipahami, serta sesuai dengan kebutuhan pengolahan data Pajak 
+Bumi dan Bangunan (PBB). 
+Dalam Sistem Informasi Pengolahan Data PBB in i, perancangan antarmuka 
+dilakukan dengan mempertimbangkan kemudahan navigasi, kejelasan informasi, serta 
+konsistensi tampilan antar halaman. Setiap halaman dirancang berdasarkan struktur menu 
+yang telah ditentukan sebelumnya, sehingga alur penggunaan sist em menjadi terarah dan 
+sistematis. 
+Desain antarmuka sistem ini terdiri dari beberapa halaman utama, yaitu: 
+1. Halaman Login 
+Halaman login merupakan tampilan awal yang digunakan untuk proses 
+autentikasi pengguna. Pada halaman ini terdapat input username dan pa ssword 
+yang harus diisi sebelum pengguna dapat mengakses sistem. Tujuan dari halaman 
+login adalah untuk menjaga keamanan data agar hanya pengguna yang memiliki 
+hak akses yang dapat masuk ke dalam sistem. 
+2. Halaman Dashboard 
+Dashboard merupakan halaman utama setelah pengguna berhasil login. 
+Halaman ini menampilkan informasi ringkas mengenai data dalam sistem, seperti 
+jumlah wajib pajak, jumlah objek pajak, serta ringkasan penerimaan PBB. 
+Dashboard juga menyediakan navigasi menuju menu-menu lainnya. 
+ 
+
+===== PAGE 76 =====
+lxxvi 
+ 
+3. Halaman Data Wajib Pajak 
+  Halaman ini digunakan untuk mengelola data wajib pajak. Pada tampilan 
+ini terdapat tabel yang menampilkan daftar wajib pajak beserta fitur tambah, 
+ubah, dan hapus data. Perancangan halaman ini bertujuan untuk memudahkan 
+proses pengelolaan data wajib pajak secara terstruktur. 
+4. Halaman Data Objek Pajak 
+Halaman ini menampilkan daftar objek pajak yang terdaftar dalam sistem. 
+Terdapat fitur untuk menambah, mengubah, dan menghapus data objek pajak. 
+Halaman ini dirancang agar pengguna dapat mengelola data objek pajak secara 
+sistematis dan terintegrasi dengan data wajib pajak. 
+5. Halaman from input pbb 
+Digunakan untuk melakukan proses penginputan untuk pengolahan data 
+pajak bumi dan bangunan pada menu ini pengguna dapat menginput nilai 
+njop,menghitung besaran pajak, dan menyimpan hasil perhitungan. 
+6. Halaman Laporan 
+  Halaman laporan digunakan untuk menampilkan data PBB yang telah 
+diolah dalam bentuk tabel laporan. Pengguna dapat melihat serta mencetak laporan 
+sesuai dengan periode tertentu. Halaman ini mendukung proses monitoring dan 
+dokumentasi data penerimaan pajak. 
+7. Halaman logout  
+
+===== PAGE 77 =====
+lxxvii 
+ 
+Menu Logout digunakan untuk keluar dari sistem secara aman setelah 
+pengguna selesai menggunakan aplikasi. Fitur ini bertujuan untuk menjaga 
+keamanan data serta mencegah akses yang tidak sah terhadap sistem. 
+Secara keseluruhan, perancangan antarmuka sistem ini dibuat dengan konsep 
+sederhana dan terstruktur agar mudah digunakan oleh pengguna. Rancangan ini menjadi 
+gambaran visual dari sistem yang akan dibangun sebelum tahap implementasi dilakukan. 
+3.2.3.12   Implementasi Interface Login  
+    
+ 
+ 
+Gambar   3.15  Implementasi Interface Login 
+ 
+ 
+ 
+ 
+
+
+===== PAGE 78 =====
+lxxviii 
+ 
+3.2.3.13   Implementasi Interface Dashboard 
+ 
+ 
+Gambar     3.16   Implementasi Interface Dashboard 
+ 
+ 
+3.2.3.14   Implementasi Interface data wajib pajak 
+ 
+
+
+===== PAGE 79 =====
+lxxix 
+ 
+ 
+ 
+ 
+                                                        Gambar   3.17       Implementasi Interface data wajib pajak  
+ 
+  
+
+
+===== PAGE 80 =====
+lxxx 
+ 
+3.2.3.15      Implementasi Interface data objek pajak  
+ 
+ 
+ 
+                                                     Gambar  3.18  Implementasi Interface data objek  pajak 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+===== PAGE 81 =====
+lxxxi 
+ 
+ 
+3.2.3.16        Implementasi Interface form input pbb 
+ 
+  
+                      Gambar  3.19      Implementasi Interface form input pbb 
+3.2.3.17      Implementasi Interface laporan  
+ 
+ 
+
+
+===== PAGE 82 =====
+lxxxii 
+ 
+ 
+                                                 Gambar   3.20     Implementasi Interface laporan  
+ 
+3..2.3.18        Implementasi Interface logout  
+ 
+ 
+                                          Gambar  3.21 Implementasi Interface logout  
+ 
+BAB  IV 
+IMPLEMENTASI 
+4.1 implementasi sistem  
+Implementasi sistem merupakan tahapan realisasi dari perancangan sistem yang 
+telah dijelaskan pada Bab III. Pada tahap ini, seluruh rancangan seperti sequence diagram, 
+class diagram, ERD, struktur menu, serta desain antarmuka diimplementasikan menjadi 
+sebuah sistem aplikasi yang dapat digunakan untuk mengelola data Pajak Bumi dan 
+Bangunan (PBB). Sistem ini dirancang untuk membantu proses pencatatan, pengolahan, 
+dan pelaporan data PBB agar lebih terstruktur, terintegrasi, dan meminimalisir kesalahan 
+
+
+===== PAGE 83 =====
+lxxxiii 
+ 
+dalam pengolahan data. Implementasi sistem dilakukan dengan mengacu pada kebutuhan 
+pengguna, yaitu petugas dan pimpinan, dengan pembagian hak akses sesuai peran masing-
+masing. 
+4.2 Spesifikasi Implementasi Sistem 
+          Dalam pengembangan sistem ini, dibutuhkan perangkat keras dan perangkat lunak 
+untuk mendukung jalannya aplikasi.  Perangkat keras diguna kan sebagai media untuk 
+menjalankan sistem, sedangkan perangkat lunak berfungsi sebagai platform dalam 
+pengembangan dan pengoperasian aplikasi. Spesifikasi yang digunakan harus mampu 
+mendukung kinerja sistem agar dapat berjalan dengan baik dan optimal. Sel ain itu, 
+pemilihan perangkat yang sesuai juga bertujuan untuk memastikan proses pengolahan data 
+dapat dilakukan secara cepat dan efisien. Dengan dukungan perangkat yang memadai, 
+sistem diharapkan dapat berjalan secara stabil dan memenuhi kebutuhan pengguna. 
+4.2.1 Spesifikasi Perangkat Keras 
+Perangkat keras yang digunakan dalam implementasi sistem antara lain: 
+1. Laptop/Komputer 
+2. Prosesor minimal Intel Core i3 atau setara 
+3. RAM minimal 4 GB 
+4. Harddisk minimal 500 GB 
+ 
+Spesifikasi perangkat keras tersebut dipilih agar sistem dapat dijalankan 
+dengan lancar tanpa hambatan yang berarti. Prosesor dan RAM berperan penting 
+dalam mendukung kinerja aplikasi, terutama saat melakukan pengolahan data. 
+Kapasitas penyimpanan yang memadai juga diperlukan untuk menampung data 
+
+===== PAGE 84 =====
+lxxxiv 
+ 
+sistem. Dengan spesifikasi ini, diharapkan proses penggunaan sistem dapat berjalan 
+dengan stabil dan responsif. 
+4.2.2 Spesifikasi Perangkat Lunak 
+           Perangkat lunak yang digunakan antara lain: 
+1. Sistem Operasi Windows 
+2. Web Browser (Google Chrome atau Mozilla Firefox) 
+3. XAMPP sebagai server local 
+4. Database MySQL 
+5. Bahasa pemrograman PHP  
+Perangkat lunak tersebut digunakan sebagai pendukung utama dalam pengembangan 
+dan pengoperasian sistem. Web browser berfungsi sebagai media untuk mengakses 
+aplikasi, sedangkan XAMPP digunakan sebagai server lokal selama proses pengembangan. 
+MySQL digunakan untuk pengelolaan database, dan PH digunakan untuk membangun 
+sistem aplikasi. Pemilihan perangkat lunak ini bertujuan agar sistem dapat berjalan secara 
+optimal dan mudah dikembangkan. Spesifikasi ini digunakan untuk memastikan sistem 
+dapat berjalan dengan baik dan stabil. Dengan kombinasi perangkat keras dan perangkat 
+lunak yang sesuai, sistem diharapkan mampu memberikan kinerja yang maksimal. 
+4.3  Implementasi Database  
+         Database dirancang berdasarkan ERD yang telah dibuat pada Bab III. Struktur tabel 
+yang digunakan telah disesuaikan dengan kebutuhan sistem agar dapat menyimpan data 
+secara terstruktur. Setiap tabel memiliki relasi yang saling terhubu ng untuk mendukung 
+proses pengolahan data dalam sistem. Implementasi database dilakukan dengan 
+menggunakan MySQL sebagai media penyimpanan data. Selain itu, perancangan ini juga 
+
+===== PAGE 85 =====
+lxxxv 
+ 
+bertujuan untuk menjaga konsistensi dan integritas data yang tersimpan. Dengan  
+implementasi database yang baik, proses pengolahan, pencarian, dan pelaporan data dapat 
+dilakukan secara lebih efektif dan efisien. 
+ 
+Tabel-tabel utama yang diimplementasikan meliputi:   
+ 
+4.3.1  table user 
+ 
+Gambar  4.1  table user 
+ 
+4.3.2   table data wajib pajak 
+ 
+Gambar 4.2  table wajib pajak 
+ 
+4.3.3    table objek pajak  
+ 
+
+
+===== PAGE 86 =====
+lxxxvi 
+ 
+ 
+Gambar 4.3   table objek pajak 
+ 
+4.3.4  table pbb   
+ 
+Gambar 4.4 table pbb 
+ 
+4.3.5  table laporan  
+ 
+Gambar 4.5 table laporan 
+ 
+4.4    implementasi Antarmuka (Interface) 
+Implementasi antarmuka sistem merupakan tahap penerapan rancangan tampilan 
+sistem ke dalam bentuk aplikasi berbasis web yang dapat digunakan oleh admin. 
+Antarmuka dirancang sederhana, terstruktur, dan mudah dipahami agar memudahkan 
+
+
+===== PAGE 87 =====
+lxxxvii 
+ 
+proses pengolahan data.Pada sistem ini, seluruh fitur hanya dapat diakses setelah pengguna 
+berhasil melakukan login. Hal ini bertujuan untuk menjaga keamanan data serta membatasi 
+akses hanya kepada pihak yang berwenang. 
+Adapun implementasi antarmuka sistem meliputi: 
+1.Halaman Login  Halaman login digunakan untuk proses autentikasi pengguna. Pengguna 
+harus memasukkan username dan password yang telah terdaftar pada sistem. Jika data yang 
+dimasukkan benar, maka sistem akan mengarahkan pengguna ke halaman dashboard. Jika 
+salah, sistem akan menampilkan pesan kesalahan.  Halaman ini berfungsi sebagai 
+keamanan awal untuk membatasi akses hanya kepada pengguna yang berwenang. Dengan 
+adanya proses login, data dalam sistem dapat lebih terjaga keamanannya. 
+2.Halaman Dashbo ard merupakan halaman utama setelah login. Pada halaman ini 
+ditampilkan ringkasan informasi seperti jumlah data wajib pajak, jumlah objek pajak, dan 
+jumlah data PBB yang tersimpan dalam sistem. Halaman ini juga menyediakan menu 
+navigasi ke seluruh fitur sistem. Selain itu, dashboard membantu pengguna dalam melihat 
+gambaran umum kondisi data secara cepat. Dengan tampilan yang ringkas, pengguna dapat 
+langsung mengakses menu yang dibutuhkan. 
+3.Halaman Data Wajib Pajak  Halaman ini digunakan untuk mengelola data  wajib pajak. 
+Admin dapat melakukan proses tambah, ubah, hapus, serta melihat detail data wajib pajak. 
+Data yang dimasukkan akan tersimpan secara otomatis ke dalam database.  Halaman ini 
+juga memudahkan dalam pencarian dan pengelompokan data wajib pajak. De ngan 
+pengelolaan yang terstruktur, data dapat selalu diperbarui sesuai kebutuhan. 
+
+===== PAGE 88 =====
+lxxxviii 
+ 
+4.Halaman Data Objek Pajak Digunakan untuk mengelola data objek pajak yang terhubung 
+dengan wajib pajak. Setiap objek pajak memiliki Nomor Objek Pajak (NOP) dan informasi 
+terkait luas serta alamat objek pajak. Halaman ini membantu dalam mencatat detail objek 
+pajak secara lengkap dan akurat. Selain itu, keterkaitan dengan data wajib pajak 
+memudahkan dalam pengelolaan kepemilikan objek pajak. 
+5.Halaman Data PBB Digunakan untuk mengelola data Pajak Bumi dan Bangunan setiap 
+tahun. Sistem akan menghitung total pajak berdasarkan nilai NJOP dan tarif pajak yang 
+telah diinputkan. Proses perhitungan dilakukan secara otomatis sehingga meminimalkan 
+kesalahan perhitungan. Data yang dihasil kan dapat langsung disimpan dan digunakan 
+untuk keperluan laporan. 
+6.Halaman Laporan  Digunakan untuk menampilkan dan mencetak laporan data PBB 
+berdasarkan tahun pajak tertentu. Laporan ini membantu dalam proses administrasi dan 
+dokumentasi.dengan implementasi antarmuka tersebut, sistem mampu mendukung proses 
+pengolahan data PBB secara lebih efektif dan efisien dibandingkan sistem manual. Dengan 
+implementasi antarmuka tersebut, sistem mampu mendukung proses pengolahan data PBB 
+secara lebih efektif dan efisie n dibandingkan sistem manual. Selain itu, sistem juga 
+memberikan kemudahan bagi pengguna dalam mengakses, mengelola, dan memantau data 
+secara terintegrasi. 
+ 
+   
+ 
+ 
+ 
+
+===== PAGE 89 =====
+lxxxix 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Table 4.1 pengujian sistem 
+      
+BAB V PENUTUP 
+ 
+ 
+No  Fitur yang diuji  Skenario 
+pengujian 
+Data uji  Output yang 
+diharapkan 
+Status  
+1 login Username dan 
+password  benar 
+Username 
+&password  
+benar 
+Sistem 
+menampilkan 
+dashboard 
+Direncanakan 
+2 login Password salah  Username 
+benar,password 
+salah 
+Sistem 
+menampilkan 
+pesan gagal 
+login 
+Direncanakan  
+3 Input data 
+wajib pajak  
+Menambahkan 
+data baru 
+Data indentitas 
+lengkap 
+Data tersimpan 
+di database 
+Direncanakan  
+4 Edit data Mengubah data Perrubahan 
+alamat 
+Data berhasil 
+diperbarui 
+Direncanakan 
+5 Hapus data 
+wajib pajak 
+Menghapus data  Pilih salah satu 
+data 
+Data terhapus 
+dari sistem 
+Direncanakan  
+6 Input objek 
+pajak  
+Menambahakan 
+objek pajak 
+Nop dan luas 
+tanah 
+Siste 
+menghitungkan 
+total pajak 
+otomatis 
+Direncanakan  
+7 Input data pbb Menghitung pajak Njop dan tarif Sistem 
+menghitung 
+total pajak 
+otomatis 
+Direncanakan  
+8 Cetak laporan Menampilkan 
+laporan 
+berdasarkan tahun 
+Tahun pajak 
+tertentu 
+Laporan tampil 
+sesuai data 
+Direncanakan  
+
+===== PAGE 90 =====
+xc 
+ 
+5.1 Kesimpulan  
+Berdasarkan hasil analisis, perancangan, implementasi, dan pengujian sistem 
+pengolahan data Pajak Bumi dan Bangunan berbasis web, maka dapat disimpulkan 
+bahwa: 
+1. Sistem yang dibangun mampu membantu proses pengelolaan data PBB secara 
+lebih terstruktur dan terkomputerisasi. 
+2. Proses penginputan, pencarian, dan pengolahan data menjadi lebih cepat dan 
+efisien dibandingkan dengan sistem manual. 
+3. Sistem mampu meminimalkan kesalahan pencatatan serta meningkatkan akurasi 
+data. 
+4. Pembuatan laporan menjadi lebih mudah dan dapat dilakukan dalam waktu yang 
+lebih singkat. 
+ 
+5.2  Saran  
+Adapun saran untuk pengembangan sistem selanjutnya adalah sebagai berikut: 
+1. Sistem dapat dikembangkan dengan fitur pembayaran pajak secara online agar 
+lebih modern dan terintegrasi. 
+2. Perlu ditambahkan sistem backup data otomatis untuk menjaga keamanan dan 
+keutuhan data. 
+3. Sistem dapat dikembangkan dengan fitur notifikasi jatuh tempo pembayaran 
+pajak. 
+4. Diperlukan pelatihan kepada pengguna agar sistem dapat digunakan secara 
+maksimal dan optimal. 
+ 
+ 
+                                             DAFTAR PUSTAKA  
+• Sugiyono. (2023). Metode Penelitian: Kuantitatif, Kualitatif, dan R&D. Bandung: Alfabeta. 
+ • Sugiyono. (2022). Metode Penelitian Kuantitatif, Kualitatif, dan R&D. Bandung: Alfabeta 
+. • Sugiyono. (2010). Metode Penelitian Kuantitatif dan Kualitatif. Bandung: Alfabeta 
+. • Sugiyono. (2005). Metode Penelitian Administrasi. Bandung: Alfabeta. 
+
+===== PAGE 91 =====
+xci 
+ 
+ 
