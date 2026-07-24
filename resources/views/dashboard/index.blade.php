@@ -21,6 +21,32 @@
     height: 220px;
     margin: 0 auto;
   }
+  .ai-insight-panel {
+    display: grid;
+    gap: 16px;
+  }
+  .ai-insight-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .ai-insight-box {
+    min-height: 120px;
+    white-space: pre-wrap;
+    border: 1px solid #ededed;
+    border-radius: 8px;
+    background: #fafafa;
+    padding: 16px;
+    color: #212121;
+    line-height: 1.55;
+  }
+  @media (max-width: 760px) {
+    .ai-insight-head {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
 </style>
 <div class="hero">
   <div>
@@ -44,6 +70,19 @@
     <p class="stat-value">Rp {{ number_format($summary['total_penerimaan_tahun'], 0, ',', '.') }}</p>
   </article>
 </div>
+
+
+<section class="panel ai-insight-panel mb-3.5">
+  <div class="ai-insight-head">
+    <div>
+      <p class="eyebrow">AI Insight</p>
+      <h3 class="mt-2 mb-1">Analisis Otomatis Dashboard</h3>
+      <p class="muted text-sm">Menggunakan data agregat dashboard tanpa mengirim KTP atau data pribadi mentah.</p>
+    </div>
+    <button id="generateInsightBtn" class="btn" type="button">Generate Insight AI</button>
+  </div>
+  <div id="aiInsightBox" class="ai-insight-box">Klik tombol generate untuk membuat ringkasan, temuan penting, dan saran tindak lanjut.</div>
+</section>
 
 <div class="dashboard-chart-grid">
   <section class="panel">
@@ -74,9 +113,42 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+const generateInsightBtn = document.getElementById('generateInsightBtn');
+const aiInsightBox = document.getElementById('aiInsightBox');
+
+generateInsightBtn?.addEventListener('click', async () => {
+  generateInsightBtn.disabled = true;
+  generateInsightBtn.textContent = 'Menganalisis...';
+  aiInsightBox.textContent = 'AI sedang membaca data agregat dashboard...';
+
+  try {
+    const res = await fetch('{{ route('dashboard.ai-insight') }}', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: JSON.stringify({})
+    });
+    const json = await res.json();
+
+    if (!res.ok) {
+      throw new Error(json.detail || json.message || 'Gagal membuat insight AI.');
+    }
+
+    aiInsightBox.textContent = json.insight || 'Insight kosong.';
+  } catch (err) {
+    aiInsightBox.textContent = `Insight AI belum bisa dibuat. ${err.message}`;
+  } finally {
+    generateInsightBtn.disabled = false;
+    generateInsightBtn.textContent = 'Generate Insight AI';
+  }
+});
+
 const data = @json($dashboardData);
-const axisColor = '#5f7378';
-const gridColor = '#e6eff0';
+const axisColor = '#707070';
+const gridColor = '#ededed';
 
 new Chart(document.getElementById('paymentStatusChart'), {
   type: 'doughnut',
@@ -85,8 +157,8 @@ new Chart(document.getElementById('paymentStatusChart'), {
     datasets: [{
       label: 'Sudah Bayar',
       data: data.paymentStatusValues,
-      backgroundColor: ['#0f9f67', '#dc2626'],
-      borderColor: ['#0a7d50', '#b91c1c'],
+      backgroundColor: ['#3ecf8e', '#1c1c1c'],
+      borderColor: ['#24b47e', '#1c1c1c'],
       borderWidth: 1
     }]
   },
@@ -105,7 +177,7 @@ new Chart(document.getElementById('objectGrowthChart'), {
     datasets: [{
       label: 'Objek Baru',
       data: data.objectGrowth,
-      backgroundColor: '#0f5f61'
+      backgroundColor: '#3ecf8e'
     }]
   },
   options: {
@@ -126,8 +198,8 @@ new Chart(document.getElementById('revenueTrendChart'), {
     datasets: [{
       label: 'Penerimaan',
       data: data.monthlyRevenue,
-      borderColor: '#0f5f61',
-      backgroundColor: 'rgba(15,95,97,.18)',
+      borderColor: '#24b47e',
+      backgroundColor: 'rgba(62,207,142,.14)',
       fill: true,
       tension: .35,
       pointRadius: 3
@@ -151,7 +223,7 @@ new Chart(document.getElementById('topRegionChart'), {
     datasets: [{
       label: 'Penerimaan',
       data: data.regionValues,
-      backgroundColor: '#14b8a6'
+      backgroundColor: '#1c1e54'
     }]
   },
   options: {
@@ -167,3 +239,9 @@ new Chart(document.getElementById('topRegionChart'), {
 });
 </script>
 @endsection
+
+
+
+
+
+

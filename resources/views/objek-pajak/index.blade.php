@@ -137,7 +137,7 @@ async function loadObj(page=1){
       return `<tr><td>${((j.meta.current_page - 1) * j.meta.per_page) + (idx + 1)}</td><td>${r.wajib_pajak?.nama_wp??r.wajibPajak?.nama_wp??'-'}</td><td>${r.nop}</td><td>${r.lokasi}</td><td>${luasTanah} m²</td><td>${luasBangunan} m²</td><td class='flex gap-2'><button class='btn' type='button' onclick='editObjFromEncoded("${encoded}")'>Ubah</button><form method='post' action='{{ url('/objek-pajak') }}/${r.id_objek}' onsubmit='return confirm("Yakin ingin menghapus data objek pajak ini?")'><input type='hidden' name='_token' value='{{ csrf_token() }}'><input type='hidden' name='_method' value='DELETE'><button class='btn danger'>Hapus</button></form></td></tr>`;
     }).join(''):`<tr><td colspan='7' class='empty'>Data kosong</td></tr>`;
     pagObj.innerHTML='';
-    for(let i=1;i<=j.meta.last_page;i++){pagObj.innerHTML+=`<button class='logout-btn ${i===j.meta.current_page?'bg-teal-50 text-teal-800':''}' onclick='loadObj(${i})'>${i}</button>`}
+    for(let i=1;i<=j.meta.last_page;i++){pagObj.innerHTML+=`<button class='logout-btn ${i===j.meta.current_page?'pager-active':''}' onclick='loadObj(${i})'>${i}</button>`}
   } catch (err) {
     if (err.name !== 'AbortError') console.error('Live search objek pajak gagal:', err);
   }
@@ -182,3 +182,4 @@ formObj.addEventListener('submit', (event) => {
 });
 </script>
 @endsection
+

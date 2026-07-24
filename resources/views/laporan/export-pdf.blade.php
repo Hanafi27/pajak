@@ -19,6 +19,9 @@
     th { background:#ccfbf1; font-weight:700; color:#134e4a; }
     .num { text-align:right; }
     .empty { text-align:center; color:#64748b; }
+    .ai-summary { border:1px solid #99f6e4; background:#f8fffd; border-radius:8px; padding:9px 10px; margin-bottom:10px; }
+    .ai-title { margin:0 0 5px 0; font-size:11px; font-weight:700; color:#115e59; }
+    .ai-text { white-space:pre-line; color:#334155; line-height:1.45; }
   </style>
 </head>
 <body>
@@ -35,6 +38,13 @@
     </div>
   </div>
 
+
+  @if(! empty($aiSummary))
+  <div class="ai-summary">
+    <p class="ai-title">Ringkasan Narasi - Filter: {{ $aiSummaryFilter ?? ($search !== '' ? $search : 'Semua Data') }}</p>
+    <div class="ai-text">{{ $aiSummary }}</div>
+  </div>
+  @endif
   <table>
     <thead>
       <tr>
@@ -67,3 +77,6 @@
   </table>
 </body>
 </html>
+
+
+

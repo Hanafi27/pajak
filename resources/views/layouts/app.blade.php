@@ -4,9 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ $title ?? 'Sistem PBB BAPENDA' }}</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
@@ -41,7 +38,7 @@
 
     <div class="mt-4 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-center">
       <p class="sidebar-label text-[11px] text-slate-500">Waktu Server</p>
-      <p id="clockText" class="text-sm font-semibold text-teal-800">--:--:--</p>
+      <p id="clockText" class="text-sm server-clock">--:--:--</p>
     </div>
   </aside>
 
@@ -163,3 +160,5 @@
 </script>
 </body>
 </html>
+
+

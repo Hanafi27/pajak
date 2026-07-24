@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Laporan;
 use App\Models\Pbb;
+use App\Services\GeminiInsightService;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
@@ -13,6 +16,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Throwable;
 
 class LaporanController extends Controller
 {
@@ -74,6 +78,26 @@ class LaporanController extends Controller
         ]);
     }
 
+    public function aiSummary(Request $request, GeminiInsightService $gemini): JsonResponse
+    {
+        $search = trim((string) $request->input('search', ''));
+        $payload = $this->buildReportInsightPayload($search);
+        $cacheKey = 'laporan-ai-summary:' . md5(json_encode($payload));
+
+        try {
+            $summary = Cache::remember($cacheKey, now()->addMinutes(30), fn (): string => $gemini->generateReportInsight($payload));
+
+            return response()->json([
+                'summary' => $summary,
+                'cached' => Cache::has($cacheKey),
+            ]);
+        } catch (Throwable $e) {
+            return response()->json([
+                'message' => 'Ringkasan AI belum bisa dibuat.',
+                'detail' => $e->getMessage(),
+            ], 422);
+        }
+    }
     public function print(Request $request): View
     {
         $periode = trim((string) $request->query('periode', ''));
@@ -97,10 +121,13 @@ class LaporanController extends Controller
     {
         $search = trim((string) $request->query('search', ''));
         $rows = $this->buildExportRows($search);
+        $aiSummary = trim((string) $request->query('ai_summary', ''));
         $pdf = Pdf::loadView('laporan.export-pdf', [
             'rows' => $rows,
             'search' => $search,
             'printedAt' => now()->format('d-m-Y H:i:s'),
+            'aiSummary' => $aiSummary,
+            'aiSummaryFilter' => $search !== '' ? $search : 'Semua Data',
         ])->setPaper('a4', 'landscape');
 
         return $pdf->stream('laporan-pbb.pdf');
@@ -148,7 +175,50 @@ class LaporanController extends Controller
             'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         ]);
     }
+    private function buildReportInsightPayload(string $search): array
+    {
+        $this->syncLaporanFromPbb();
 
+        $summaryQuery = Laporan::query()->orderByDesc('periode');
+        if ($search !== '') {
+            $summaryQuery->where('periode', 'like', "%{$search}%");
+        }
+
+        $periods = $summaryQuery
+            ->get(['periode', 'total_penerimaan'])
+            ->map(fn (Laporan $row): array => [
+                'periode' => (string) $row->periode,
+                'total_penerimaan' => (float) $row->total_penerimaan,
+            ])
+            ->values();
+
+        $detailQuery = Pbb::query();
+        if ($search !== '') {
+            $detailQuery->where('tahun', 'like', "%{$search}%");
+        }
+
+        $detail = $detailQuery
+            ->selectRaw('tahun, COUNT(*) as jumlah_data, SUM(total_pajak) as total_pajak, AVG(total_pajak) as rata_rata_pajak, MAX(total_pajak) as pajak_tertinggi')
+            ->groupBy('tahun')
+            ->orderByDesc('tahun')
+            ->get()
+            ->map(fn ($row): array => [
+                'tahun' => (string) $row->tahun,
+                'jumlah_data' => (int) $row->jumlah_data,
+                'total_pajak' => (float) $row->total_pajak,
+                'rata_rata_pajak' => round((float) $row->rata_rata_pajak, 2),
+                'pajak_tertinggi' => (float) $row->pajak_tertinggi,
+            ])
+            ->values();
+
+        return [
+            'filter' => $search !== '' ? $search : 'semua periode',
+            'jumlah_periode' => $periods->count(),
+            'total_penerimaan_seluruh_periode' => (float) $periods->sum('total_penerimaan'),
+            'periode_ringkasan' => $periods->take(8)->all(),
+            'detail_per_tahun' => $detail->take(8)->all(),
+        ];
+    }
     private function syncLaporanFromPbb(): void
     {
         $groups = Pbb::query()
@@ -218,3 +288,12 @@ class LaporanController extends Controller
         });
     }
 }
+
+
+
+
+
+
+
+
+

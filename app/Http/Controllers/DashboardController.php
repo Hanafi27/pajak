@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\ObjekPajak;
-use App\Models\Laporan;
 use App\Models\Pbb;
 use App\Models\WajibPajak;
+use App\Services\GeminiInsightService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
+use Throwable;
 
 class DashboardController extends Controller
 {
@@ -16,7 +20,66 @@ class DashboardController extends Controller
     {
         $role = session('auth_user.role', 'petugas');
         $currentYear = (int) now()->format('Y');
+        $dashboard = $this->buildDashboardPayload($currentYear);
 
+        return view('dashboard.index', [
+            'summary' => $dashboard['summary'],
+            'dashboardData' => $dashboard['dashboardData'],
+            'role' => $role,
+        ]);
+    }
+
+    public function aiInsight(Request $request, GeminiInsightService $gemini): JsonResponse
+    {
+        $role = session('auth_user.role', 'petugas');
+        $currentYear = (int) now()->format('Y');
+        $dashboard = $this->buildDashboardPayload($currentYear);
+
+        $payload = [
+            'role_pengguna' => $role,
+            'tahun_berjalan' => $currentYear,
+            'ringkasan' => $dashboard['summary'],
+            'status_pembayaran' => array_combine(
+                $dashboard['dashboardData']['paymentStatusLabels'],
+                $dashboard['dashboardData']['paymentStatusValues']
+            ),
+            'penerimaan_bulanan_miliar' => array_combine(
+                $dashboard['dashboardData']['monthlyLabels'],
+                $dashboard['dashboardData']['monthlyRevenue']
+            ),
+            'pertumbuhan_objek_bulanan' => array_combine(
+                $dashboard['dashboardData']['monthlyLabels'],
+                $dashboard['dashboardData']['objectGrowth']
+            ),
+            'top_wilayah_penerimaan_miliar' => array_map(
+                fn (string $wilayah, float $nilai): array => [
+                    'wilayah' => $wilayah,
+                    'nilai' => $nilai,
+                ],
+                $dashboard['dashboardData']['regionLabels'],
+                $dashboard['dashboardData']['regionValues']
+            ),
+        ];
+
+        $cacheKey = 'dashboard-ai-insight:' . md5(json_encode($payload));
+
+        try {
+            $insight = Cache::remember($cacheKey, now()->addMinutes(30), fn (): string => $gemini->generateDashboardInsight($payload));
+
+            return response()->json([
+                'insight' => $insight,
+                'cached' => Cache::has($cacheKey),
+            ]);
+        } catch (Throwable $e) {
+            return response()->json([
+                'message' => 'Insight AI belum bisa dibuat.',
+                'detail' => $e->getMessage(),
+            ], 422);
+        }
+    }
+
+    private function buildDashboardPayload(int $currentYear): array
+    {
         $summary = [
             'wajib_pajak' => WajibPajak::query()->count(),
             'objek_pajak' => ObjekPajak::query()->count(),
@@ -84,18 +147,22 @@ class DashboardController extends Controller
             ->map(fn ($value) => round($value / 1000000000, 2))
             ->all();
 
-        $dashboardData = [
-            'monthlyLabels' => $monthlyLabels,
-            'monthlyRevenue' => $monthlyRevenue,
-            'objectGrowth' => $objectGrowth,
-            'paymentStatusLabels' => ['Sudah Bayar', 'Belum Bayar'],
-            'paymentStatusValues' => [$objekSudahBayar, $objekBelumBayar],
-            'regionLabels' => $regionLabels,
-            'regionValues' => $regionValues,
-            'role' => $role,
-            'currentYear' => $currentYear,
+        return [
+            'summary' => $summary,
+            'dashboardData' => [
+                'monthlyLabels' => $monthlyLabels,
+                'monthlyRevenue' => $monthlyRevenue,
+                'objectGrowth' => $objectGrowth,
+                'paymentStatusLabels' => ['Sudah Bayar', 'Belum Bayar'],
+                'paymentStatusValues' => [$objekSudahBayar, $objekBelumBayar],
+                'regionLabels' => $regionLabels,
+                'regionValues' => $regionValues,
+                'currentYear' => $currentYear,
+            ],
         ];
-
-        return view('dashboard.index', compact('summary', 'dashboardData', 'role'));
     }
 }
+
+
+
+

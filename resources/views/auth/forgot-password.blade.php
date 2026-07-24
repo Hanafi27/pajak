@@ -4,29 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Portal Bapenda - Lupa Kata Sandi</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <style>
-    :root { --brand-green: #00945b; --brand-teal: #0f5f61; }
     * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; background: #edf6f5; font-family: "IBM Plex Sans", sans-serif; color: #1e293b; }
-    .page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px 16px; }
-    .card { width: 100%; max-width: 450px; background: #fff; border: 1px solid #dbe4ea; border-radius: 18px; box-shadow: 0 2px 12px rgba(15,23,42,.08); padding: 28px 24px; }
-    .logo { width: 78px; height: 78px; object-fit: contain; display: block; margin: 0 auto 8px; }
-    h1 { margin: 0 0 16px; text-align: center; font-family: "Sora", sans-serif; font-size: 30px; color: #1e293b; }
-    .subtitle { margin: 0 0 18px; text-align: center; color: #64748b; font-size: 14px; }
+    body { min-height: 100vh; overflow: auto; background: #fff; color: #171717; }
+    .page { min-height: 100vh; display: grid; place-items: center; padding: 32px 16px; background: #fafafa; }
+    .card { width: 100%; max-width: 440px; background: #fff; border: 1px solid #dfdfdf; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.08); padding: 32px; }
+    .logo { width: 74px; height: 74px; object-fit: contain; display: block; margin: 0 auto 12px; }
+    h1 { margin: 0 0 10px; text-align: center; font-size: 36px; font-weight: 500; color: #171717; letter-spacing: -.72px; }
+    .subtitle { margin: 0 0 24px; text-align: center; color: #707070; font-size: 16px; font-weight: 400; line-height: 1.5; }
     .field-wrap { margin-bottom: 14px; }
-    .label { display: block; margin-bottom: 8px; font-size: 14px; color: #475569; font-weight: 600; }
-    .input { width: 100%; border: 1px solid #cbd5e1; border-radius: 12px; padding: 12px 14px; font-size: 16px; outline: none; transition: .2s; }
-    .input:focus { border-color: var(--brand-green); box-shadow: 0 0 0 2px rgba(0,148,91,.18); }
-    .error { margin-bottom: 12px; padding: 10px 12px; border-radius: 10px; border: 1px solid #fecdd3; background: #fff1f2; color: #be123c; font-size: 14px; }
-    .btn { width: 100%; border: 0; border-radius: 12px; padding: 12px 14px; font-size: 18px; font-weight: 700; background: var(--brand-green); color: #fff; cursor: pointer; transition: .2s; }
-    .btn:hover { opacity: .92; }
-    .back { margin-top: 14px; text-align: center; }
-    .back a { color: var(--brand-teal); text-decoration: none; font-weight: 600; font-size: 14px; }
-    .back a:hover { text-decoration: underline; }
+    .label { display: block; margin-bottom: 8px; font-size: 14px; color: #212121; font-weight: 500; }
+    .input { width: 100%; min-height: 38px; border: 1px solid #dfdfdf; border-radius: 6px; padding: 8px 12px; font-size: 16px; font-weight: 400; color: #171717; outline: none; transition: .2s; }
+    .input:focus { border-color: #24b47e; box-shadow: 0 0 0 3px rgba(62,207,142,.18); }
+    .error { margin-bottom: 12px; padding: 10px 12px; border-radius: 8px; border: 1px solid #fecdd3; background: #fff1f2; color: #be123c; font-size: 14px; font-weight: 400; }
+    .btn { width: 100%; min-height: 38px; border: 0; border-radius: 6px; padding: 8px 16px; font-size: 14px; font-weight: 500; background: #3ecf8e; color: #171717; cursor: pointer; transition: .2s; }
+    .btn:hover { background: #24b47e; }
+    .back { margin-top: 16px; text-align: center; }
+    .back a { color: #171717; text-decoration: underline; text-decoration-color: #c7c7c7; text-underline-offset: 3px; font-weight: 500; font-size: 14px; }
+    .back a:hover { text-decoration-color: #171717; }
   </style>
 </head>
 <body>
@@ -65,3 +61,4 @@
   </main>
 </body>
 </html>
+

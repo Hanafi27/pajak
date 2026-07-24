@@ -25,6 +25,7 @@
           <td>{{ $i->tahun }}</td>
           <td class="flex gap-2">
             <button class="btn" type="button" onclick='editPbb(@json($i))'>Ubah</button>
+            <button class="btn" type="button" onclick="openDraftPbb({{ $i->id_pbb }})">Draft Surat AI</button>
             <form method="post" action="{{ route('pbb.destroy', $i->id_pbb) }}" onsubmit="return confirm('Yakin ingin menghapus data PBB ini?')">
               @csrf @method('DELETE')
               <button class="btn danger">Hapus</button>
@@ -76,6 +77,40 @@
   </div>
 </div>
 
+<div id="modalDraftPbb" class="modal-backdrop hidden">
+  <div class="modal-card draft-modal-card">
+    <div class="modal-head">
+      <div>
+        <h3 class="text-lg font-semibold">Draft Surat Tagihan AI</h3>
+        <p id="draftPbbStatus" class="draft-status">Siap membuat preview surat.</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('modalDraftPbb')">&times;</button>
+    </div>
+    <div class="draft-workspace">
+      <div class="draft-preview-shell">
+        <article id="draftPbbPreview" class="draft-paper">
+          <div class="draft-letterhead">
+            <img src="{{ asset('assets/logo.png') }}" alt="Logo Bapenda">
+            <div>
+              <strong>BADAN PENDAPATAN DAERAH KABUPATEN BANDUNG</strong>
+              <span>Draft internal surat tagihan Pajak Bumi dan Bangunan</span>
+            </div>
+          </div>
+          <h4 class="draft-doc-title">Preview Surat Tagihan PBB</h4>
+          <div class="draft-body"><p>Belum ada draft.</p></div>
+        </article>
+      </div>
+      <aside class="draft-copy-panel">
+        <textarea id="draftPbbText" readonly>Belum ada draft.</textarea>
+        <div class="actions" style="gap:8px">
+          <button id="copyDraftPbbBtn" class="btn" type="button">Salin Teks</button>
+          <button id="printDraftPbbBtn" class="btn" type="button">Preview PDF</button>
+          <button class="btn danger" type="button" onclick="closeModal('modalDraftPbb')">Tutup</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
 <script>
 const njoptkp = {{ (float) $njoptkp }};
 const tbodyPbb=document.getElementById('tbodyPbb');
@@ -89,7 +124,126 @@ const njopPbb=document.getElementById('njopPbb');
 const tarifPbb=document.getElementById('tarifPbb');
 const tahunPbb=document.getElementById('tahunPbb');
 const totalPbbPreview=document.getElementById('totalPbbPreview');
+const draftPbbText=document.getElementById('draftPbbText');
+const draftPbbPreview=document.getElementById('draftPbbPreview');
+const draftPbbStatus=document.getElementById('draftPbbStatus');
+const copyDraftPbbBtn=document.getElementById('copyDraftPbbBtn');
+const printDraftPbbBtn=document.getElementById('printDraftPbbBtn');
+let latestDraftPbb = { text: '', meta: null };
 
+function escapeHtml(value){
+  return String(value || '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]));
+}
+
+function draftMetaHtml(meta){
+  if (!meta) return '';
+  const rows = [
+    ['Nama Wajib Pajak', meta.nama_wajib_pajak],
+    ['NOP', meta.nop],
+    ['Tahun Pajak', meta.tahun],
+    ['NJOP', meta.njop],
+    ['Tarif', meta.tarif_persen],
+    ['Total PBB', meta.total_pajak],
+    ['Dibuat', meta.dibuat_pada],
+  ];
+  return `<div class="draft-meta-grid">${rows.map(([label,value]) => `<div>${escapeHtml(label)}</div><div>: ${escapeHtml(value || '-')}</div>`).join('')}</div>`;
+}
+
+function draftBodyHtml(text){
+  const lines = String(text || '').split(/\r?\n/).map(line => line.trim());
+  let html = '';
+  let listOpen = false;
+  lines.forEach((line) => {
+    if (!line) {
+      if (listOpen) { html += '</ul>'; listOpen = false; }
+      return;
+    }
+    if (/^-\s+/.test(line)) {
+      if (!listOpen) { html += '<ul>'; listOpen = true; }
+      html += `<li>${escapeHtml(line.replace(/^-\s+/, ''))}</li>`;
+      return;
+    }
+    if (listOpen) { html += '</ul>'; listOpen = false; }
+    if (/^[A-Za-zÀ-ÿ\s]+:$/.test(line) && line.length < 40) {
+      html += `<h4>${escapeHtml(line.replace(':', ''))}</h4>`;
+      return;
+    }
+    html += `<p>${escapeHtml(line)}</p>`;
+  });
+  if (listOpen) html += '</ul>';
+  return html || '<p>Belum ada draft.</p>';
+}
+
+function renderDraftPreview(text, meta){
+  draftPbbPreview.innerHTML = `
+    <div class="draft-letterhead">
+      <img src="{{ asset('assets/logo.png') }}" alt="Logo Bapenda">
+      <div>
+        <strong>BADAN PENDAPATAN DAERAH KABUPATEN BANDUNG</strong>
+        <span>Draft internal surat tagihan Pajak Bumi dan Bangunan</span>
+      </div>
+    </div>
+    <h4 class="draft-doc-title">Preview Surat Tagihan PBB</h4>
+    ${draftMetaHtml(meta)}
+    <div class="draft-body">${draftBodyHtml(text)}</div>
+  `;
+}
+
+async function openDraftPbb(id){
+  latestDraftPbb = { text: '', meta: null };
+  draftPbbText.value = 'AI sedang menyusun draft surat...';
+  draftPbbStatus.textContent = 'AI sedang menyusun draft surat...';
+  renderDraftPreview('AI sedang menyusun draft surat...', null);
+  openModal('modalDraftPbb');
+  try {
+    const res = await fetch(`{{ url('/pbb') }}/${id}/ai-draft`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: JSON.stringify({})
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.detail || json.message || 'Gagal membuat draft surat AI.');
+    latestDraftPbb = { text: json.draft || 'Draft kosong.', meta: json.meta || null };
+    draftPbbText.value = latestDraftPbb.text;
+    draftPbbStatus.textContent = 'Preview siap diperiksa.';
+    renderDraftPreview(latestDraftPbb.text, latestDraftPbb.meta);
+  } catch (err) {
+    latestDraftPbb = { text: `Draft surat AI belum bisa dibuat. ${err.message}`, meta: null };
+    draftPbbText.value = latestDraftPbb.text;
+    draftPbbStatus.textContent = 'Draft belum bisa dibuat.';
+    renderDraftPreview(latestDraftPbb.text, null);
+  }
+}
+
+function openDraftPdfPreview(){
+  if (!latestDraftPbb.text) return;
+  const win = window.open('', '_blank');
+  if (!win) {
+    if (window.uiDialog?.alert) window.uiDialog.alert('Preview PDF diblokir browser. Izinkan pop-up untuk halaman ini.');
+    return;
+  }
+  win.document.write(`<!doctype html><html lang="id"><head><meta charset="utf-8"><title>Preview Draft Surat PBB</title><style>
+    @page{size:A4;margin:18mm 16mm} body{margin:0;background:#f3f4f6;color:#111827;font-family:Arial,sans-serif}.toolbar{position:sticky;top:0;display:flex;justify-content:flex-end;gap:8px;padding:10px 14px;background:#111827}.toolbar button{border:0;border-radius:6px;padding:8px 12px;background:#10b981;color:#fff;font-weight:700}.paper{box-sizing:border-box;width:210mm;min-height:297mm;margin:16px auto;padding:26mm 20mm;background:#fff;box-shadow:0 16px 40px rgba(0,0,0,.16);font-family:Georgia,'Times New Roman',serif}.draft-letterhead{display:flex;align-items:center;gap:14px;padding-bottom:14px;border-bottom:2px solid #111827}.draft-letterhead img{width:54px;height:54px;object-fit:contain}.draft-letterhead strong{display:block;color:#064e3b;font-family:Arial,sans-serif;font-size:14px;letter-spacing:.02em}.draft-letterhead span{display:block;margin-top:2px;color:#4b5563;font-family:Arial,sans-serif;font-size:11px}.draft-doc-title{margin:18px 0 14px;text-align:center;font-family:Arial,sans-serif;font-size:15px;font-weight:700;text-transform:uppercase}.draft-meta-grid{display:grid;grid-template-columns:150px 1fr;gap:5px 12px;margin:0 0 18px;font-family:Arial,sans-serif;font-size:12px;color:#374151}.draft-body{font-size:14px;line-height:1.65}.draft-body h4{margin:18px 0 8px;font-family:Arial,sans-serif;font-size:12px;color:#065f46;text-transform:uppercase;letter-spacing:.04em}.draft-body p{margin:0 0 10px;text-align:justify;text-align-last:left}.draft-body ul{margin:0 0 12px 18px;padding:0}.draft-body li{margin-bottom:5px}@media print{body{background:#fff}.toolbar{display:none}.paper{width:auto;min-height:auto;margin:0;padding:0;box-shadow:none}}
+  </style></head><body><div class="toolbar"><button onclick="window.print()">Cetak / Simpan PDF</button></div><main class="paper">${draftPbbPreview.innerHTML}</main></body></html>`);
+  win.document.close();
+}
+
+copyDraftPbbBtn?.addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(draftPbbText.value || '');
+    if (window.uiDialog?.success) window.uiDialog.success('Teks draft berhasil disalin.');
+  } catch (err) {
+    draftPbbText.select();
+    document.execCommand('copy');
+    if (window.uiDialog?.success) window.uiDialog.success('Teks draft berhasil disalin.');
+  }
+});
+
+printDraftPbbBtn?.addEventListener('click', openDraftPdfPreview);
 function openModal(id){const m=document.getElementById(id);m.classList.remove('hidden');m.classList.add('flex')}
 function closeModal(id){const m=document.getElementById(id);m.classList.add('hidden');m.classList.remove('flex')}
 
@@ -164,10 +318,10 @@ async function loadPbb(page=1){
     const encoded = encodeURIComponent(JSON.stringify(r));
     const nop = r.objek_pajak?.nop ?? r.objekPajak?.nop ?? '-';
     const namaWp = r.objek_pajak?.wajib_pajak?.nama_wp ?? r.objekPajak?.wajibPajak?.nama_wp ?? '-';
-    return `<tr><td>${((j.meta.current_page - 1) * j.meta.per_page) + (idx + 1)}</td><td>${nop}</td><td>${namaWp}</td><td>Rp ${Number(r.njop||0).toLocaleString('id-ID')}</td><td>${Math.round((Number(r.tarif||0)*100)).toLocaleString('id-ID')}%</td><td>Rp ${Number(r.total_pajak||0).toLocaleString('id-ID')}</td><td>${r.tahun}</td><td class='flex gap-2'><button class='btn' type='button' onclick='editPbbFromEncoded("${encoded}")'>Ubah</button><form method='post' action='{{ url('/pbb') }}/${r.id_pbb ?? r.id}' onsubmit='return confirm("Yakin ingin menghapus data PBB ini?")'><input type='hidden' name='_token' value='{{ csrf_token() }}'><input type='hidden' name='_method' value='DELETE'><button class='btn danger'>Hapus</button></form></td></tr>`;
+    return `<tr><td>${((j.meta.current_page - 1) * j.meta.per_page) + (idx + 1)}</td><td>${nop}</td><td>${namaWp}</td><td>Rp ${Number(r.njop||0).toLocaleString('id-ID')}</td><td>${Math.round((Number(r.tarif||0)*100)).toLocaleString('id-ID')}%</td><td>Rp ${Number(r.total_pajak||0).toLocaleString('id-ID')}</td><td>${r.tahun}</td><td class='flex gap-2'><button class='btn' type='button' onclick='editPbbFromEncoded("${encoded}")'>Ubah</button><button class='btn' type='button' onclick='openDraftPbb(${r.id_pbb ?? r.id})'>Draft Surat AI</button><form method='post' action='{{ url('/pbb') }}/${r.id_pbb ?? r.id}' onsubmit='return confirm("Yakin ingin menghapus data PBB ini?")'><input type='hidden' name='_token' value='{{ csrf_token() }}'><input type='hidden' name='_method' value='DELETE'><button class='btn danger'>Hapus</button></form></td></tr>`;
   }).join(''):`<tr><td colspan='8' class='empty'>Data kosong</td></tr>`;
   pagPbb.innerHTML='';
-  for(let i=1;i<=j.meta.last_page;i++){pagPbb.innerHTML+=`<button class='logout-btn ${i===j.meta.current_page?'bg-teal-50 text-teal-800':''}' onclick='loadPbb(${i})'>${i}</button>`}
+  for(let i=1;i<=j.meta.last_page;i++){pagPbb.innerHTML+=`<button class='logout-btn ${i===j.meta.current_page?'pager-active':''}' onclick='loadPbb(${i})'>${i}</button>`}
 }
 
 let tPbb;
@@ -215,3 +369,4 @@ resetPbbForm();
 loadPbb(1);
 </script>
 @endsection
+

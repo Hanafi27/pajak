@@ -18,6 +18,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->midd
 
 Route::middleware('auth.session')->group(function (): void {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::post('/dashboard/ai-insight', [DashboardController::class, 'aiInsight'])->name('dashboard.ai-insight');
 
     Route::middleware('role:petugas')->group(function (): void {
         Route::get('/wajib-pajak', [WajibPajakController::class, 'index'])->name('wajib-pajak.index');
@@ -33,11 +34,14 @@ Route::middleware('auth.session')->group(function (): void {
         Route::get('/pbb', [PbbController::class, 'index'])->name('pbb.index');
         Route::post('/pbb', [PbbController::class, 'store'])->name('pbb.store');
         Route::put('/pbb/{id_pbb}', [PbbController::class, 'update'])->name('pbb.update');
+        Route::post('/pbb/{id_pbb}/ai-draft', [PbbController::class, 'aiDraft'])->name('pbb.ai-draft');
         Route::delete('/pbb/{id_pbb}', [PbbController::class, 'destroy'])->name('pbb.destroy');
     });
 
     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+    Route::post('/laporan/ai-summary', [LaporanController::class, 'aiSummary'])->name('laporan.ai-summary');
     Route::get('/laporan/cetak', [LaporanController::class, 'print'])->name('laporan.print');
     Route::get('/laporan/export/pdf', [LaporanController::class, 'exportPdf'])->name('laporan.export.pdf');
     Route::get('/laporan/export/excel', [LaporanController::class, 'exportExcel'])->name('laporan.export.excel');
 });
+

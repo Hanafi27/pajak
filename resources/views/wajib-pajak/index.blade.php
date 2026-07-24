@@ -61,7 +61,7 @@
             <input id="ubahAlamatWp" type="checkbox" class="h-4 w-4 rounded border-slate-300">
             Ubah alamat
           </label>
-          <span id="statusAlamatWp" class="rounded-full bg-slate-200 px-2.5 py-1 text-[11px] font-semibold text-slate-700">Alamat terkunci</span>
+          <span id="statusAlamatWp" class="rounded-full px-2.5 py-1 text-[11px] font-semibold status-pill-muted">Alamat terkunci</span>
         </div>
       </div>
       <div class="field"><label>Kecamatan</label><select id="kecamatanWp"><option value="">Pilih Kecamatan</option></select></div>
@@ -128,8 +128,8 @@ function setAlamatFieldsStateWp(enabled) {
   rwWp.disabled = !enabled;
   statusAlamatWp.textContent = enabled ? 'Mode edit alamat aktif' : 'Alamat terkunci';
   statusAlamatWp.className = enabled
-    ? 'rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-semibold text-emerald-700'
-    : 'rounded-full bg-slate-200 px-2.5 py-1 text-[11px] font-semibold text-slate-700';
+    ? 'rounded-full px-2.5 py-1 text-[11px] font-semibold status-pill-active'
+    : 'rounded-full px-2.5 py-1 text-[11px] font-semibold status-pill-muted';
 }
 
 function parseAlamatWp(address) {
@@ -235,7 +235,7 @@ async function loadWp(page = 1) {
 
     pagWp.innerHTML = '';
     for (let i = 1; i <= j.meta.last_page; i++) {
-      pagWp.innerHTML += `<button class='logout-btn ${i === j.meta.current_page ? 'bg-teal-50 text-teal-800' : ''}' onclick='loadWp(${i})'>${i}</button>`;
+      pagWp.innerHTML += `<button class='logout-btn ${i === j.meta.current_page ? 'pager-active' : ''}' onclick='loadWp(${i})'>${i}</button>`;
     }
   } catch (err) {
     if (err.name !== 'AbortError') {
@@ -386,3 +386,4 @@ formWp.addEventListener('submit', (event) => {
 
 </script>
 @endsection
+
