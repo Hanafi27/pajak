@@ -11,6 +11,7 @@ Sistem ini membantu petugas dalam:
 - Mengolah data **PBB** (NJOP, tarif, total pajak)
 - Melihat dan mengekspor **Laporan PBB** (PDF preview dan Excel `.xlsx`)
 - Memantau dashboard statistik dan grafik berbasis data aktual
+- Menyusun insight dashboard, narasi laporan, dan draft surat tagihan dengan integrasi AI Gemini
 
 Role yang tersedia:
 
@@ -24,6 +25,9 @@ Role yang tersedia:
 - CRUD Wajib Pajak, Objek Pajak, dan PBB
 - Validasi input (contoh: KTP hanya angka maks 16 digit, NOP 18 digit)
 - Pencarian live (AJAX) dan pagination
+- Dashboard statistik, grafik, dan AI Insight
+- AI Narasi Laporan yang mengikuti filter data laporan
+- AI Draft Surat Tagihan PBB dengan preview dokumen bergaya PDF dan teks yang bisa disalin
 - Export laporan:
   - PDF (preview di browser)
   - Excel (`.xlsx`)
@@ -37,20 +41,22 @@ Role yang tersedia:
 - Chart.js
 - DomPDF
 - PhpSpreadsheet
+- Google Gemini API
 
 ## Cara Clone & Menjalankan Proyek
 
 ```bash
-git clone <url-repo-anda> bapenda
+git clone https://github.com/Hanafi27/pajak.git bapenda
 cd bapenda
 composer install
+npm install
 cp .env.example .env
 php artisan key:generate
 ```
 
 ## Konfigurasi Environment
 
-Edit `.env` untuk koneksi database MySQL:
+Edit `.env` untuk koneksi database MySQL dan Gemini API:
 
 ```env
 APP_NAME="Sistem PBB BAPENDA"
@@ -64,7 +70,25 @@ DB_PORT=3306
 DB_DATABASE=bapenda
 DB_USERNAME=root
 DB_PASSWORD=
+
+GEMINI_API_KEY=isi_api_key_gemini_anda
+GEMINI_MODEL=gemini-3.5-flash-lite
 ```
+
+Setelah mengubah `.env`, jalankan:
+
+```bash
+php artisan config:clear
+```
+
+## Setup Integrasi AI Gemini
+
+Fitur AI memakai Google Gemini API untuk membuat insight dashboard, narasi laporan, dan draft surat tagihan PBB.
+
+1. Buka Google AI Studio dan buat API key Gemini.
+2. Masukkan API key ke file `.env` pada variabel `GEMINI_API_KEY`.
+3. Gunakan model aktif, misalnya `gemini-3.5-flash-lite`.
+4. Jangan commit file `.env` karena berisi API key dan konfigurasi lokal.
 
 ## Inisialisasi Database
 
@@ -89,13 +113,18 @@ php artisan serve
 Jalankan asset frontend:
 
 ```bash
-npm install
 npm run dev
 ```
 
 Buka aplikasi di:
 
 - `http://127.0.0.1:8000`
+
+Untuk build production asset:
+
+```bash
+npm run build
+```
 
 ## Akun Demo
 
@@ -120,6 +149,7 @@ Catatan:
 ## Catatan Pengembangan
 
 - Beberapa visual menggunakan modal dan toast custom.
+- AI memakai variabel `GEMINI_API_KEY` dan `GEMINI_MODEL` dari `.env`.
 - Export PDF membutuhkan ekstensi PHP:
   - `gd`
   - `mbstring`
@@ -129,14 +159,17 @@ Catatan:
 
 ## Troubleshooting Singkat
 
-1. **`SQLSTATE... no such table` / tabel tidak ditemukan**  
+1. **`SQLSTATE... no such table` / tabel tidak ditemukan**
    Jalankan: `php artisan migrate`
 
-2. **Asset CSS/JS tidak ter-load**  
+2. **Asset CSS/JS tidak ter-load**
    Pastikan: `npm run dev` aktif
 
-3. **File PDF/Excel gagal generate**  
+3. **File PDF/Excel gagal generate**
    Cek ekstensi PHP (`gd`, `zip`, `xml`) aktif di `php.ini`
+
+4. **AI gagal membuat insight atau draft surat**
+   Pastikan `GEMINI_API_KEY` sudah benar, `GEMINI_MODEL` memakai model aktif, lalu jalankan `php artisan config:clear`.
 
 ## Lisensi
 
